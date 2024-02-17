@@ -243,7 +243,7 @@ const Main = () => {
         </section>
         {/* this will be a router component*/}
         <section className='main'>
-            <h1>Resume Generator</h1>
+            <h1>Neonatal Assistant</h1>
             {view === 'input' && (
             <div>
                 <div className='navBarTop'>

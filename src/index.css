@@ -25,31 +25,30 @@ button {
 }
 @keyframes change {
   0% {
-    background-color: rgb(27, 59, 165);
+    background-color: #000000;
   }
   25% {
-    background-color: rgb(0,0,0);
+    background-color: #d3d3d3;
   }
   50% {
-    background-color: rgb(115, 250, 88);
+    background-color: #f40000;
   }
   75% {
-    background-color: rgb(255, 255, 255);
+    background-color: #d3d3d3;
   }
   100% {
-    background-color: rgb(27, 59, 165);
+    background-color: #000000;
   }}
 body {
   margin: 0;
   padding: o;
-  background-image: url("./images/paralax2.png"), url("./images/transluscentgradient2.png");
+  background-image: url("./images/transluscentgradient2.png");
   background-attachment: fixed;
   background-repeat: no-repeat, repeat;
   background-size: cover; 
-  /* background-color: rgb(21, 0, 183); */
   display: flex;
   background-color: rgb(27, 59, 165);
-  animation: change 15s ease-out infinite;
+  animation: change 30s ease-out infinite;
   }
 
 .app{

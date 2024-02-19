@@ -43,6 +43,7 @@ const App = () => {
   }
 
   return (
+    <div className = "app">
     <UserProvider>
     <Router>
       <Navigation />
@@ -57,6 +58,7 @@ const App = () => {
       </Routes>
     </Router>
     </UserProvider>
+    </div>
   )
 
 }

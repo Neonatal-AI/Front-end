@@ -2,10 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,600;1,300;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Monoton&family=Oswald:wght@200;400;600;700&family=Roboto:wght@100;300;400;500;700;900&family=Rubik+Mono+One&display=swap');
 /* generic text */
+
 * {
   color: #ffffff;
-  font-family: 'Roboto Mono',sans-sarif;
-    
+  font-family: 'Roboto Mono', sans-sarif; 
 }
 
 /* animation keyframe */
@@ -29,15 +29,14 @@
 
 /* formatting for generic HTML tag types */
 body {
-  margin: 0;
+  /* margin: 0;
   padding: o;
   background-image: url("./images/transluscentgradient2.png");
   background-attachment: fixed;
   background-repeat: no-repeat, repeat;
   background-size: cover; 
-  display: flex;
-  background-color: rgb(27, 59, 165);
-  animation: change 30s ease-out infinite;
+  display: flex; */
+  animation: change 60s ease-out infinite;
   }
 h1 {
   font-family: 'Monoton';
@@ -111,6 +110,12 @@ input[type]::file-selector-button {
 /* class name formatting */
 .app{
   display: flex;
+  margin: 0;
+  padding: o;
+  background-image: url("./images/transluscentgradient2.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat, repeat;
+  background-size: cover; 
 }
 .main {
   display: flex;
@@ -149,7 +154,6 @@ input[type]::file-selector-button {
   border: 2px;
   border-style: solid;
   list-style-type: none;
-  /* padding: 5 px 5px; */
   margin: 5px;
   cursor: crosshair;
 }

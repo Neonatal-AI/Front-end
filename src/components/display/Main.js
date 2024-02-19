@@ -26,6 +26,7 @@ const Main = () => {
     const [ loginLoading, setLoginLoading ] = useState(false)
 
 // use effect to update values of display fields
+// yeah yeah yeah but we really want to use sockets
     useEffect(() => {
         if (optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null) {
             historyPost();
@@ -39,6 +40,7 @@ const Main = () => {
       }, [optimizedResume, optimizedCover, jobSummary, assessment]);
       
 // using effect to update history when the page refreshes
+// yeah yeah yeah but we really want to use sockets
     useEffect(() => {
         try{
             const fetchHistory = async () => {
@@ -61,7 +63,6 @@ const Main = () => {
     }, []);
 
 // a bunch of function expressions
-
     const handleFileChange = (event) => {
         const fileType = event.target.files[0].type
         const file = event.target.files[0]
@@ -74,7 +75,6 @@ const Main = () => {
                 
         reader.readAsText(file);
     }
-    
     const updatePrompts = async (type) => {
         let prompt
         if (type === 'resume') {
@@ -120,7 +120,6 @@ const Main = () => {
         console.error(error)
         }
     }
-
     const getCompletions = async () => {
         setLoginLoading(true)
         let values = ['resume', 'summary', 'coverLetter', 'jobFit']
@@ -171,15 +170,13 @@ const Main = () => {
         } else if (valueupdate === "jobFit") {
             setAssessment(data.replace(/\n/g, "<br>"));
         }
-    }
-        
+    }     
     const resetJobHooks = () => {
         setOptimizedResume(null)
         setJobSummary(null)
         setOptimizedCover(null)
         setAssessment(null)
     }
-
     const historyPost = async () => {
         const document = {
         optimizedResume: optimizedResume,

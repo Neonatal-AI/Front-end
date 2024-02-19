@@ -1,14 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import * as Yup from 'yup'
 
 import GradientButton from '../common/GradientButton'
 
-
-const LoginSchema = Yup.object().shape({
-  email: Yup.string().required('Email is required'),
-  password: Yup.string().required('Password is required')
-});
 
 const Login = () => { 
 
@@ -20,7 +14,7 @@ const Login = () => {
   const handleUsernameChange = (event) => setUsername(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
   const [ loginLoading, setLoginLoading ] = useState(false)
-  const loginAttempt = async (script, valueupdate) => {
+  const loginAttempt = async () => {
     setLoginLoading(true)
     const options = {
       method: "POST",

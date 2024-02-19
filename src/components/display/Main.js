@@ -1,6 +1,4 @@
-import { useState, useEffect, useContext, React} from "react";
-import { UserContext } from "../../context/UserContext";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, React} from "react";
 import GradientButton from '../common/GradientButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
@@ -22,45 +20,8 @@ const Main = () => {
     const [ViewAssessment, setViewAssessment] = useState(null)
     const [view, setView] = useState('input')
     const [historyData, setHistoryData] = useState([])
-    const { user, setUser } = useContext(UserContext)
     const [ loginLoading, setLoginLoading ] = useState(false)
 
-// use effect to update values of display fields
-// yeah yeah yeah but we really want to use sockets
-    useEffect(() => {
-        if (optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null) {
-            historyPost();
-            setViewResume(optimizedResume);
-            setViewCover(optimizedCover);
-            setViewAssessment(assessment);
-            resetJobHooks()
-            setView('resume');
-          alert("Your application docs are ready!")
-        }
-      }, [optimizedResume, optimizedCover, jobSummary, assessment]);
-      
-// using effect to update history when the page refreshes
-// yeah yeah yeah but we really want to use sockets
-    useEffect(() => {
-        try{
-            const fetchHistory = async () => {
-                const response = await fetch(`${API_URL}/historyGet`, {
-                    method: 'GET',
-                    credentials: 'include', 
-                    headers:{
-                        id: sessionCookie
-                    }
-                });
-
-                const data = await response.json();
-                setHistoryData(data);
-                }
-        fetchHistory();
-        }catch (error) {
-        console.log(error)
-        alert("OH NO! we couldn't get the history from the server.")
-        }
-    }, []);
 
 // a bunch of function expressions
     const handleFileChange = (event) => {
@@ -205,6 +166,44 @@ const Main = () => {
         console.error('There was a problem with the fetch operation:', error)
         }
     }
+
+
+    // use effect to update values of display fields
+    // yeah yeah yeah but we really want to use sockets
+    useEffect(() => {
+        if (optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null) {
+            historyPost();
+            setViewResume(optimizedResume);
+            setViewCover(optimizedCover);
+            setViewAssessment(assessment);
+            resetJobHooks()
+            setView('resume');
+        alert("Your application docs are ready!")
+        }
+    }, [optimizedResume, optimizedCover, jobSummary, assessment]);
+    
+    // using effect to update history when the page refreshes
+    // yeah yeah yeah but we really want to use sockets
+    useEffect(() => {
+        try{
+            const fetchHistory = async () => {
+                const response = await fetch(`${API_URL}/historyGet`, {
+                    method: 'GET',
+                    credentials: 'include', 
+                    headers:{
+                        id: sessionCookie
+                    }
+                });
+
+                const data = await response.json();
+                setHistoryData(data);
+                }
+        fetchHistory();
+        }catch (error) {
+        console.log(error)
+        alert("OH NO! we couldn't get the history from the server.")
+        }
+    }, []);
 
     return (
         <div className="app">

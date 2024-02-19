@@ -1,10 +1,9 @@
 // npm modules
-import React, { useState, useContext, Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 // internal components
-import { UserContext } from './context/UserContext'
 import { UserProvider } from './context/Provider'
 import Login from './components/display/Login'
 import RegistrationForm from './components/display/AccountCreation'

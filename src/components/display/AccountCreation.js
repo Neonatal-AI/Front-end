@@ -1,11 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import * as yup from "yup"
 
-
-import { AuthContext } from '../../context/AuthContext'
-import { UserContext } from '../../context/UserContext'
-import { UserProvider } from '../../context/Provider'
 import GradientButton from '../common/GradientButton'
 const schema = yup.object().shape({
     firstName: yup
@@ -42,7 +38,6 @@ const RegistrationForm = () => {
   const [ loginLoading, setLoginLoading ] = useState(false)
   const [banner, setBanners] = useState(null)
   const [errors, setErrors] = useState({})
-  const [redirectOnLogin, setRedirectOnLogin] = useState(false)
 
   const navigate = useNavigate()
   const API_URL = process.env.REACT_APP_API_URL 

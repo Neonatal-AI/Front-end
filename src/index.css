@@ -112,7 +112,8 @@ input[type]::file-selector-button {
   display: flex;
 }
 .main {
-  background-image:  url("./images/box.png");;
+  background-image:  url("./images/box.png");
+  background-size: cover;
   display: flex;
   vertical-align: 13%;
   flex-direction: column;

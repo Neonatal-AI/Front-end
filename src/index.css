@@ -29,13 +29,13 @@
 
 /* formatting for generic HTML tag types */
 body {
-  /* margin: 0;
+  margin: 0;
   padding: o;
   background-image: url("./images/transluscentgradient2.png");
   background-attachment: fixed;
   background-repeat: no-repeat, repeat;
   background-size: cover; 
-  display: flex; */
+  display: flex;
   animation: change 60s ease-out infinite;
   }
 h1 {
@@ -110,20 +110,8 @@ input[type]::file-selector-button {
 /* class name formatting */
 .app{
   display: flex;
-  margin: 0;
-  padding: o;
-  background-image: url("./images/transluscentgradient2.png");
-  background-attachment: fixed;
-  background-repeat: no-repeat, repeat;
-  background-size: cover; 
 }
-.main{
-  background-image: url("./images/box.png");
-  background-attachment: fixed;
-  background-repeat: no-repeat, repeat;
-  background-size: cover; 
-}
-.display {
+.main {
   display: flex;
   vertical-align: 13%;
   flex-direction: column;

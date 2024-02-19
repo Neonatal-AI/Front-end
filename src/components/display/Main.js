@@ -207,7 +207,7 @@ const Main = () => {
     }
 
     return (
-        <div className="main">
+        <div className="app">
         <section className="side-bar">
 
             {/* this will be a router component*/}
@@ -239,7 +239,7 @@ const Main = () => {
             </nav>
         </section>
         {/* this will be a router component*/}
-        <section className='display'>
+        <section className='main'>
             <h1>Neonatal Assistant</h1>
             {view === 'input' && (
             <div>

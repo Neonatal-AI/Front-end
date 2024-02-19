@@ -7,13 +7,16 @@ import GradientButton from '../common/GradientButton'
 const Login = () => { 
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000'
-  const [banner, setBanners] = useState(null);
+
   const navigate = useNavigate()
+  const [banner, setBanners] = useState(null);
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const handleUsernameChange = (event) => setUsername(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
   const [ loginLoading, setLoginLoading ] = useState(false)
+  
+  // meat and potatoes of the login page
   const loginAttempt = async () => {
     setLoginLoading(true)
     const options = {

@@ -9,141 +9,29 @@ const Main = () => {
     // variables and hooks
     const sessionCookie = Cookies.get('session')
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
-    const [resumeValue, setResumeValue] = useState('')
-    const [jobValue, setJobValue] = useState('')
-    const [optimizedResume, setOptimizedResume] = useState(null)
-    const [optimizedCover, setOptimizedCover] = useState(null)
-    const [assessment, setAssessment] = useState(null)
-    const [jobSummary, setJobSummary] = useState(null)
-    const [ViewResume, setViewResume] = useState(null)
-    const [ViewCover, setViewCover] = useState(null)
-    const [ViewAssessment, setViewAssessment] = useState(null)
-    const [view, setView] = useState('input')
+
+    // function tied to job hooks. relevant to "resetHooks"
+    // const [optimizedResume, setOptimizedResume] = useState(null)
+
+    // relevant to setting the document to be displayed. Might eb something we use... might not
+    // const [ViewResume, setViewResume] = useState(null)
+
+    const [view, setView] = useState('input') // toggle for view selection
     const [historyData, setHistoryData] = useState([])
-    const [ loginLoading, setLoginLoading ] = useState(false)
 
 
 // a bunch of function expressions
-    const handleFileChange = (event) => {
-        const fileType = event.target.files[0].type
-        const file = event.target.files[0]
-        const reader = new FileReader()
-        console.log(fileType)
-        reader.onload = (e) => {
-        const content = e.target.result;
-        setResumeValue(content);
-        };
-                
-        reader.readAsText(file);
-    }
-    const updatePrompts = async (type) => {
-        let prompt
-        if (type === 'resume') {
-        prompt = `
-        If the text between the html div tags is a resume and the text between the html p tags is a job description, 
-        tailor the resume for the job description and return only the tailored resume. do not include the job description in your response.
-        \nOtherwise, simply respond "INVALID INPUT".
-        \nAdhere stricly to the facts contained in the original resume and do not to include skills or experience the applicant does not have.
-        \n<div> \n${resumeValue} \n</div> \n\n<p> \n${jobValue} \n</p>`
-        } else if (type === 'coverLetter') {
-        prompt = `Create a cover letter using info from the resume between the html div tags and the job application between the html p tags.
-        \nIn the cover letter- do not to include skills or experience not listed in that resume. Accurately portray the job applicant in the letter, in the best light.
-        \nif the value between the html div tags is not a job description or the input between the html p tags is not a job description return "INVALID INPUT"\n
-        \n<div>n${resumeValue}\n</div>\n\n<p>\n${jobValue}\n</p> `
-        } else if (type === 'jobFit') {
-        prompt = `in your response, do not mention the markup language. refer to a resume as "your resume" and a job description as "the job".
-        \nDo you think the resume between the html div tags portrays a strong candidate for the job description between the html p tags?
-        \n Are there any skills or knowledge gaps the candidate should address? If so, do you have any recommendations for the applicant?
-        \n<div>\n${resumeValue}\n</div>\n\n<p>\n${jobValue}\n</p> `
-        }else if (type === 'summary') {
-        prompt = `Return only a four word summary to the text between the html div tags. Your response should be exactly four words.
-        \n
-        \n<div>\n${jobValue}\n</div>`
-        }
-        return prompt
-    }
-    const openAiReq = async (script, valueupdate) => {
-        const options = {
-        method: "POST",
-        credentials: 'include', 
-        body: JSON.stringify({
-            prompt: script
-        }),
-        headers:{
-            "Content-Type": "application/json"
-        },
-        }
-        try{
-        const response = await fetch(`${API_URL}/completions`, options)
-        const data = await response.json()
-        return data
-        } catch(error){
-        console.error(error)
-        }
-    }
-    const getCompletions = async () => {
-        setLoginLoading(true)
-        let values = ['resume', 'summary', 'coverLetter', 'jobFit']
-                    
-        for  (const val of values) {
-            let prompt = await updatePrompts(val)
-            let data = await Promise.allSettled([openAiReq(prompt, val)])
-            let content = data[0].value.choices[0].message.content.toString().replace(/\n/g, "<br>")
-            if(data.length > 0){
-                updateVals(content, val)
-            } else {
-                console.error('Invalid data received', data);
-            }
-        }
-    }
-    const getCompletions2 = async () => {
-        setLoginLoading(true)
-        try {
-            const response = await fetch(`${API_URL}/completions2`, {
-                method: 'POST',
-                credentials: 'include', 
-                headers: {
-                'Content-Type': 'application/json',
-                id: sessionCookie
-                },
-                body: JSON.stringify({
-                    job: jobValue,
-                    resumeFile: resumeValue
-                })
-            })
-            if (!response.ok) {
-                throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log(data.message)
-            } catch (error) {
-            console.error('There was a problem with the fetch operation:', error)
-            }
+
+    const resetHooks = () => {
+        // an example of resetting the hook, we might want to do something like this with the Neonatal project
+        // in particular, we might want to utilize hooks to display items from the history sidebar
+        // setOptimizedResume(null)
 
     }
-    const updateVals = (data, valueupdate) => {
-        if (valueupdate === "resume") {
-            setOptimizedResume(data);
-        }else if (valueupdate === "summary") {
-            setJobSummary(data);
-        } else if (valueupdate === "coverLetter") {
-            setOptimizedCover(data.replace(/\n/g, "<br>"));
-        } else if (valueupdate === "jobFit") {
-            setAssessment(data.replace(/\n/g, "<br>"));
-        }
-    }     
-    const resetJobHooks = () => {
-        setOptimizedResume(null)
-        setJobSummary(null)
-        setOptimizedCover(null)
-        setAssessment(null)
-    }
+    // still relevant. we will want to input new values though, pertinent to our application
     const historyPost = async () => {
         const document = {
-        optimizedResume: optimizedResume,
-        optimizedCover: optimizedCover,
-        assessment: assessment,
-        summary: jobSummary,
+        // in JSON format, the data we are sending to the API to save to our DataBase. I left the date field and the sesstion cookie field
         date: new Date(),
         userid: sessionCookie
         }
@@ -167,23 +55,22 @@ const Main = () => {
         }
     }
 
-
     // use effect to update values of display fields
     // yeah yeah yeah but we really want to use sockets
     useEffect(() => {
-        if (optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null) {
-            historyPost();
-            setViewResume(optimizedResume);
-            setViewCover(optimizedCover);
-            setViewAssessment(assessment);
-            resetJobHooks()
+        if (/*optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null*/null) {
+            historyPost(); // function to post data to database 
+            // setViewResume(optimizedResume);
+            // setViewCover(optimizedCover);
+            // setViewAssessment(assessment);
+            resetHooks()
             setView('resume');
         alert("Your application docs are ready!")
         }
-    }, [optimizedResume, optimizedCover, jobSummary, assessment]);
+    }, [/*optimizedResume, optimizedCover, jobSummary, assessment*/ ]); //these are the items "watched" by useEffect here
     
     // using effect to update history when the page refreshes
-    // yeah yeah yeah but we really want to use sockets
+    // yeah yeah yeah but we really want to use sockets but this is still useful
     useEffect(() => {
         try{
             const fetchHistory = async () => {
@@ -218,9 +105,9 @@ const Main = () => {
             <ul className="history">
             {historyData.map((item, index) => (
                 <li key={index} onClick={() => {
-                setViewResume(item.optimizedResume);
-                setViewCover(item.optimizedCover);
-                setViewAssessment(item.assessment);
+                // setViewResume(item.optimizedResume);
+                // setViewCover(item.optimizedCover);
+                // setViewAssessment(item.assessment);
                 setView('resume')
             }}>
                 {/* Display relevant fields from item */}
@@ -252,22 +139,21 @@ const Main = () => {
                 <div className='inputArea'>
                 <label htmlFor="baseResume">Please insert a resume to optimize.</label>
                 <br></br><br></br>
-                <input type="file"  id="baseResume" name="baseResume" accept=".txt, .doc, .dot, .docx, .dotx, .pdf" onChange={handleFileChange}></input>
+                <input type="file"  id="baseResume" name="baseResume" accept=".txt, .doc, .dot, .docx, .dotx, .pdf" onChange={null}></input>
                 <br></br><br></br>
                 <label htmlFor="jobdescription">Please insert a job description.</label>
                 <br></br><br></br>
-                <textarea rows="20" cols="50" id="jobdescription" name="jobdescription" onChange={(e)=>setJobValue(e.target.value)}></textarea> <br></br><br></br>
+                <textarea rows="1" cols="5" id="jobdescription" name="jobdescription" onChange={null}></textarea> 
+                <br></br><br></br>
                 </div>
                 <div className='navBarBottom'>
                 <br></br>
                 <GradientButton 
                     type="submit" 
                     text="Submit"
-                    loading={loginLoading}
+                    // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                     onClick={async () => {
-                        setView('loading')
-                        await Promise.allSettled([getCompletions()])
-                        setLoginLoading(false)
+
                     }}
                 />
                 <br></br>
@@ -292,7 +178,7 @@ const Main = () => {
                 </div>
                 <div className='displayArea'>
                 <p>Optimized Resume:</p>
-                <p dangerouslySetInnerHTML={{__html: ViewResume}} />
+                {/* <p dangerouslySetInnerHTML={{__html: ViewResume}} /> */}
                 </div>
                 <div className='bottomButtons'>
                 <button onClick={() => window.location.reload()}>Reload</button>
@@ -308,7 +194,7 @@ const Main = () => {
                 </div>
                 <div className='displayArea'>
                 <p>Optimized Cover Letter: </p>
-                <p dangerouslySetInnerHTML={{__html: ViewCover}} />
+                {/* <p dangerouslySetInnerHTML={{__html: ViewCover}} /> */}
                 </div>
             <div className='bottomButtons'>
                 <button onClick={() => window.location.reload()}>Reload</button>
@@ -318,13 +204,14 @@ const Main = () => {
             {view === 'jobFit' && (
             <div>
                 <div className='navBarTop'>
+                    {/* we could use a simialr toggle for selecting what you want to create */}
                 <button onClick={() => setView('resume')}>View Resume</button> <br></br>
                 <button onClick={() => setView('coverLetter')}>View cover letter</button> <br></br>
                 <button onClick={() => setView('jobFit')}>View Assessment</button>
                 </div>
                 <div className='displayArea'>
                 <p> Assessment: </p>
-                <p dangerouslySetInnerHTML={{__html: ViewAssessment}} />
+                {/* <p dangerouslySetInnerHTML={{__html: ViewAssessment}} /> */}
                 </div>
                 <div className='bottomButtons'>
                 <button onClick={() => window.location.reload()}>Reload</button>

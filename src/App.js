@@ -18,6 +18,7 @@ const App = () => {
   const Navigation = () => {
     return (
       <nav>
+        {/* only want this to render on page if user has a valid session cookie */}
         {!sessionCookie && <Link to="/login">Login </Link>}
         {!sessionCookie && <br/>}
         {!sessionCookie && <br/>}

@@ -18,15 +18,15 @@ const App = () => {
   const Navigation = () => {
     return (
       <nav>
-        {/* only want this to render on page if user has a valid session cookie */}
-        {!sessionCookie && <Link to="/login">Login </Link>}
-        {!sessionCookie && <br/>}
-        {!sessionCookie && <br/>}
-        {!sessionCookie && <Link to="/register">Register </Link>}
+        {/* only want this to render on page if user does not have a valid session cookie */}
+        {!sessionCookie && <Link to="/login"><font size="+2">Login |</font> </Link>}
+        {!sessionCookie && <Link to="/register"><font size="+2">Register |</font> </Link>}
 
-        {sessionCookie && <Link to="/main">Main </Link>}
-        {sessionCookie && <br/>}
-        {sessionCookie && <GradientButton 
+        {/* only want this to render on page if user does have a valid session cookie */}
+        {!sessionCookie && <Link to="/main"><font size="+2">Main</font></Link>}
+        <br/>
+        {!sessionCookie && <GradientButton 
+        className="logout"
         type="submit" 
         text="LOGOUT"
         loading={loginLoading}
@@ -50,9 +50,9 @@ const App = () => {
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<RegistrationForm />} />
         {sessionCookie ? (
-          <Route path="/main" element={<Main />} />
+          <Route path="/main" element={<Login />} />
         ) : (
-          <Route path="/login" element={<Login />} /> 
+          <Route path="/main" element={<Main />} /> 
         )}      
       </Routes>
     </Router>

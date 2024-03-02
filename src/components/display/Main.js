@@ -5,7 +5,12 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 import Cookies from 'js-cookie'
 
+import DropdownMenu from './DropdownMenu';
+
 const Main = () => {
+    // dropdown menu options
+    const gestational_ages = [22, 23, 24, 25, 26, 27, 28, 29, 30];
+
     // variables and hooks
     const sessionCookie = Cookies.get('session')
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
@@ -20,7 +25,7 @@ const Main = () => {
     const [historyData, setHistoryData] = useState([])
 
 
-// a bunch of function expressions
+    // a bunch of function expressions
 
     const resetHooks = () => {
         // an example of resetting the hook, we might want to do something like this with the Neonatal project
@@ -91,20 +96,23 @@ const Main = () => {
         alert("OH NO! we couldn't get the history from the server.")
         }
     }, []);
-
+    
     return (
         <div className="app">
+            
+            {/* the history sidebar */}
         <section className="side-bar">
 
-            {/* this will be a router component*/}
-            <button id="createresume" onClick={() => setView('input')}>
-            + Create application profile
+            {/* this MIGHT be a router component later...*/}
+            <button onClick={() => setView('input')}>
+            + Create clerical documents
             </button>
 
-            {/* this will be a router component*/}
+            {/* this MIGHT be a router component later...*/}
             <ul className="history">
             {historyData.map((item, index) => (
                 <li key={index} onClick={() => {
+                    // this is where we will set the view to the historical clerical document
                 // setViewResume(item.optimizedResume);
                 // setViewCover(item.optimizedCover);
                 // setViewAssessment(item.assessment);
@@ -121,46 +129,124 @@ const Main = () => {
             ))}
             </ul>
             <nav>
-            <p>This section contains your application profiles</p>
+            {/* <image src="../../../public/norton.jpg" alt="norton logo" style="width: 100px; height: 100px;"/> */}
+            <p>This section contains historical clerical documents</p>
             </nav>
         </section>
+
         {/* this will be a router component*/}
         <section className='main'>
+            {/* just the title */}
             <h1>Neonatal Assistant</h1>
+
+
             {view === 'input' && (
             <div>
-                <div className='navBarTop'>
-                <button onClick={() => setView('resume')}>View Resume</button>
-                <br></br>
-                <button onClick={() => setView('coverLetter')}>View cover letter</button>
-                <br></br>
-                <button onClick={() => setView('jobFit')}>View Assessment</button>
-                </div>
+                {/* input fields */}
                 <div className='inputArea'>
-                <label htmlFor="baseResume">Please insert a resume to optimize.</label>
+
+                    {/* used in BPD calculator and EPBO calculator */}
+                <label htmlFor="birth_weight">Birth weight (grams):  </label>
+                <textarea rows="1" cols="4" id="birth_weight" name="birth_weight" onChange={null}></textarea> 
+                <br/>
+                <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
                 <br></br><br></br>
-                <input type="file"  id="baseResume" name="baseResume" accept=".txt, .doc, .dot, .docx, .dotx, .pdf" onChange={null}></input>
+
+                    {/* used in BPD calculator and EPBO calculator */}
+                <label>Infant sex: </label>
+                <DropdownMenu options={['Male', 'Female']} />
                 <br></br><br></br>
-                <label htmlFor="jobdescription">Please insert a job description.</label>
+
+                    {/* used in BPD calculator only */}
+                <label>Singleton birth: </label>
+                <DropdownMenu options={['True', 'False']} />
                 <br></br><br></br>
-                <textarea rows="1" cols="5" id="jobdescription" name="jobdescription" onChange={null}></textarea> 
+
+                    {/* used in BPD calculator only */}
+                <label>Antenatal Steroids: </label>
+                <DropdownMenu options={['True', 'False']} />
+                <br/>
+                <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
                 <br></br><br></br>
+
+                   {/* used in BPD calculator only */}
+                <label htmlFor="ethnicity">Race / Ethnicity:  </label>
+                <DropdownMenu options={['White', 'Black', 'Hispanic']} />
+                <br></br><br></br>
+
+                   {/* used in BPD calculator only */}
+                <label htmlFor="postnatal_day">Postnatal Day:  </label>
+                <DropdownMenu options={[1, 3, 7, 14, 21, 28]} />
+                <br></br><br></br>
+
+                    {/* used in BPD calculator and EPBO calculator */}
+                <label htmlFor="gestational_age">Gestational Age (weeks):  </label>
+                <DropdownMenu options={gestational_ages} />
+                <br></br><br></br>
+
+                   {/* used in BPD calculator only */}
+                <label htmlFor="ventilator_type">Respiratory Support Type:  </label>
+                <DropdownMenu options={["HVF (High Frequency Ventilation)", "CV (Conventional Ventilation)", "Non-invasive Positive Pressure Ventilation", "CPAP (Continuous Positive Airway Pressure)", "NC (Nasal Canulla)", "Hood", "No Support"]} />
+                <br></br><br></br>
+
+                {/* Surgical Necrotizing Enterocolitis */}
+                    {/*  */}
+                <label htmlFor="surgical_necrotizing_enterocolitis">Surgical Necrotizing Enterocolitis:  </label>
+                <DropdownMenu options={["Yes","No","Unknown"]} />
+                <br/>
+                <span className="sidenote">Surgical necrotizing enterocolitis should only be entered for postnatal days 14 and 28.</span>
+                <br></br><br></br>
+
+                {/* used in BPD calculator and EPBO calculator */}
+                <label htmlFor="FiO2">FiO2<sup>1</sup> (grams):  </label>
+                <textarea rows="1" cols="4" id="FiO2" name="FiO2" onChange={null}></textarea> 
+                <br/>
+                <span className="sidenote">Please enter a value between 21 and 100.</span>
+                <br></br><br></br>
+
+                    {/* only relevant for the GPT prompt */}
+                <label htmlFor="clenician_notes">Additional Notes:  </label>
+                <br/>
+                <textarea rows="9" cols="100" id="clenician_notes" name="clenician_notes" onChange={null}></textarea> 
+                <br/><br/>
                 </div>
+                {/* buttons for document creation */}
                 <div className='navBarBottom'>
                 <br></br>
                 <GradientButton 
                     type="submit" 
-                    text="Submit"
+                    text="Create Prenatal Consult Docs"
                     // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                     onClick={async () => {
 
                     }}
                 />
                 <br></br>
-                <button onClick={() => window.location.reload()}>Reload</button>
+                <GradientButton 
+                    type="submit" 
+                    text="Create First Week of Life Handout"
+                    // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
+                    onClick={async () => {
+
+                    }}
+                />
+                <br></br>
+                <GradientButton 
+                    type="submit" 
+                    text="Create Continued Expectations Docs"
+                    // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
+                    onClick={async () => {
+
+                    }}
+                />
+                <br></br>
+                <br></br>
+                
                 </div>
             </div>
             )}
+
+            {/* this is the page loading view. no big deal, really... but important nonetheless */}
             {view === 'loading' && (
             <div>
                 <span className="flex items-center">
@@ -169,6 +255,8 @@ const Main = () => {
                 </span>
             </div>
             )}
+
+            {/*  */}
             {view === 'resume' && (
             <div>
                 <div className='navBarTop'>
@@ -221,6 +309,7 @@ const Main = () => {
         </section>
         </div>
     );
+    
 }
 
 export default Main;

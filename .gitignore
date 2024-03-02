@@ -27,3 +27,6 @@ yarn-error.log*
 docker-compose.yml
 Dockerfile
 .dockerignore
+
+# dev env only rn
+App.js

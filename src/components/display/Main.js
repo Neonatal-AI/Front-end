@@ -8,15 +8,27 @@ import Cookies from 'js-cookie'
 import DropdownMenu from './DropdownMenu';
 
 const Main = () => {
-    // dropdown menu options
-    const gestational_ages = [22, 23, 24, 25, 26, 27, 28, 29, 30];
-
     // variables and hooks
     const sessionCookie = Cookies.get('session')
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
-    // function tied to job hooks. relevant to "resetHooks"
-    // const [optimizedResume, setOptimizedResume] = useState(null)
+    // web hooks for input fields
+    const [gestational_age, setGestationalAge] = useState(null)
+    const [birth_weight, setBirthWeight] = useState(null)
+    const [singleton, setSingleton] = useState(null)
+    const [steroids, setSteroids] = useState(null)
+    const [sex, setSex] = useState(null)
+    const [ethnicity, setEthnicity] = useState(null)
+    const [ruptured_membrane, setRupturedMembrane] = useState(null)
+    const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState(null)
+    const [pre_eclampsia, setPreEclampsia] = useState(null)
+    const [clinician_notes, setclinicianNotes] = useState(null) 
+
+    // web hooks for output options
+    const [literacy_level, setLiteracyLevel] = useState(null)
+    const [translate, setTranslate] = useState(null)
+    const [language, setLanguage] = useState(null)
+
 
     // relevant to setting the document to be displayed. Might eb something we use... might not
     // const [ViewResume, setViewResume] = useState(null)
@@ -33,12 +45,57 @@ const Main = () => {
         // setOptimizedResume(null)
 
     }
-    // still relevant. we will want to input new values though, pertinent to our application
-    const historyPost = async () => {
+
+    const documentRequest = async () => {
         const document = {
-        // in JSON format, the data we are sending to the API to save to our DataBase. I left the date field and the sesstion cookie field
-        date: new Date(),
-        userid: sessionCookie
+            //  data we are using to generate documents: 
+            // Date, user agreement cookie, input fields, output options...
+                date: new Date(),
+                userid: sessionCookie,
+                inputFields: {
+                    gestational_age: gestational_age,
+                    birth_weight: birth_weight,
+                    singleton: singleton,
+                    steroids: steroids,
+                    sex: sex,
+                    ethnicity: ethnicity,
+                    ruptured_membrane: ruptured_membrane,
+                    length_of_ruptured_membrane:length_of_ruptured_membrane,
+                    pre_eclampsia:pre_eclampsia,
+                    clinician_notes:clinician_notes
+                },
+                outputOptions: {
+                    literacy_level: literacy_level,
+                    translate: translate,
+                    language: language
+                }
+            }
+        // console.log(document)
+        try {
+            const response = await fetch(`${API_URL}/`, {
+                method: 'POST',
+                credentials: 'include', 
+                headers: {
+                'Content-Type': 'application/json',
+                id: sessionCookie
+                },
+                body: JSON.stringify(document),
+            })
+            if (!response.ok) {
+                throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data)
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error)
+        }
+    }
+
+    const historyPost = async () => {
+        // doc to send to database
+        const document = {
+            date: new Date(),
+            userid: sessionCookie
         }
         try {
         const response = await fetch(`${API_URL}/historyPost`, {
@@ -101,38 +158,38 @@ const Main = () => {
         <div className="app">
             
             {/* the history sidebar */}
-        <section className="side-bar">
+        {/* <section className="side-bar"> */}
 
             {/* this MIGHT be a router component later...*/}
-            <button onClick={() => setView('input')}>
-            + Create clerical documents
-            </button>
+            {/* <button onClick={() => setView('input')}> */}
+            {/* + Create clerical documents */}
+            {/* </button> */}
 
             {/* this MIGHT be a router component later...*/}
-            <ul className="history">
-            {historyData.map((item, index) => (
-                <li key={index} onClick={() => {
-                    // this is where we will set the view to the historical clerical document
-                // setViewResume(item.optimizedResume);
-                // setViewCover(item.optimizedCover);
-                // setViewAssessment(item.assessment);
-                setView('resume')
-            }}>
+            {/* <ul className="history"> */}
+            {/* {historyData.map((item, index) => ( */}
+                {/* <li key={index} onClick={() => { */}
+                    {/* // this is where we will set the view to the historical clerical document */}
+                {/* // setViewResume(item.optimizedResume); */}
+                {/* // setViewCover(item.optimizedCover); */}
+                {/* // setViewAssessment(item.assessment); */}
+                {/* setView('resume') */}
+            {/* }}> */}
                 {/* Display relevant fields from item */}
-                {item.date.slice(0,10)}
-                {<br></br>}
-                {item.date.slice(10,-5)}
-                {<br></br>}
-                {<br></br>}
-                {item.summary}
-                </li>
-            ))}
-            </ul>
-            <nav>
+                {/* {item.date.slice(0,10)} */}
+                {/* {<br></br>} */}
+                {/* {item.date.slice(10,-5)} */}
+                {/* {<br></br>} */}
+                {/* {<br></br>} */}
+                {/* {item.summary} */}
+                {/* </li> */}
+            {/* ))} */}
+            {/* </ul> */}
+            {/* <nav> */}
             {/* <image src="../../../public/norton.jpg" alt="norton logo" style="width: 100px; height: 100px;"/> */}
-            <p>This section contains historical clerical documents</p>
-            </nav>
-        </section>
+            {/* <p>This section contains historical clerical documents</p> */}
+            {/* </nav> */}
+        {/* </section> */}
 
         {/* this will be a router component*/}
         <section className='main'>
@@ -141,103 +198,93 @@ const Main = () => {
 
 
             {view === 'input' && (
-            <div>
-                {/* input fields */}
-                <div className='inputArea'>
-
-                    {/* used in BPD calculator and EPBO calculator */}
-                <label htmlFor="birth_weight">Birth weight (grams):  </label>
-                <textarea rows="1" cols="4" id="birth_weight" name="birth_weight" onChange={null}></textarea> 
+            <div className="inputForm">
+                
+                <div className="inputData">
+                <h2>Output Options</h2>
+                    {/* literacy level */}
+                <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/perf_levels.asp">literacy level</a>:</label>
+                <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
+                <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onChange={(e)=>setLiteracyLevel(e.target.value)}/>
                 <br/>
-                <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
-                <br></br><br></br>
+
+                    {/* Translation? */}
+                <label htmlFor="translate">Do they need this document translated?  </label>
+                <DropdownMenu options={["Yes", "No"]} onChange={(e)=>setTranslate(e.target.value)}/>
+                <br/>
+                <div hidden><label htmlFor="translation_language">Language:  </label> <br/>
+                <DropdownMenu id="translateion_language" options={["Spanish", "Mandarin"]} onChange={(e)=>setLanguage(e.target.value)}/></div>
+                <br/>
+
+                </div>
+                {/* input fields */}
+                <div className='inputData'>
+                <h2>Patient Information</h2>
+                    {/* used in BPD calculator and EPBO calculator */}
+                <label>Estimated Gestational Age (weeks):  </label>
+                <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onChange={(e)=>setGestationalAge(e.target.value)}/>
+                <br/>
 
                     {/* used in BPD calculator and EPBO calculator */}
-                <label>Infant sex: </label>
-                <DropdownMenu options={['Male', 'Female']} />
-                <br></br><br></br>
+                <label>Estimated birth weight (grams):  </label>
+                <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
+                <textarea rows="1" cols="4" id="birth_weight" name="birth_weight" onChange={(e)=>setBirthWeight(e.target.value)}></textarea> 
+                <br/>
 
                     {/* used in BPD calculator only */}
                 <label>Singleton birth: </label>
-                <DropdownMenu options={['True', 'False']} />
-                <br></br><br></br>
+                <DropdownMenu options={['True', 'False']} onChange={(e)=>setSingleton(e.target.value)}/>
+                <br/>
 
                     {/* used in BPD calculator only */}
                 <label>Antenatal Steroids: </label>
-                <DropdownMenu options={['True', 'False']} />
-                <br/>
                 <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
-                <br></br><br></br>
+                <DropdownMenu options={['True', 'False']} onChange={(e)=>setSteroids(e.target.value)}/>
+                <br/>
+
+                    {/* used in BPD calculator and EPBO calculator */}
+                <label>Infant sex: </label>
+                <DropdownMenu options={['Male', 'Female']} onChange={(e)=>setSex(e.target.value)}/>
+                <br/>
 
                    {/* used in BPD calculator only */}
                 <label htmlFor="ethnicity">Race / Ethnicity:  </label>
-                <DropdownMenu options={['White', 'Black', 'Hispanic']} />
-                <br></br><br></br>
-
-                   {/* used in BPD calculator only */}
-                <label htmlFor="postnatal_day">Postnatal Day:  </label>
-                <DropdownMenu options={[1, 3, 7, 14, 21, 28]} />
-                <br></br><br></br>
-
-                    {/* used in BPD calculator and EPBO calculator */}
-                <label htmlFor="gestational_age">Gestational Age (weeks):  </label>
-                <DropdownMenu options={gestational_ages} />
-                <br></br><br></br>
-
-                   {/* used in BPD calculator only */}
-                <label htmlFor="ventilator_type">Respiratory Support Type:  </label>
-                <DropdownMenu options={["HVF (High Frequency Ventilation)", "CV (Conventional Ventilation)", "Non-invasive Positive Pressure Ventilation", "CPAP (Continuous Positive Airway Pressure)", "NC (Nasal Canulla)", "Hood", "No Support"]} />
-                <br></br><br></br>
-
-                {/* Surgical Necrotizing Enterocolitis */}
-                    {/*  */}
-                <label htmlFor="surgical_necrotizing_enterocolitis">Surgical Necrotizing Enterocolitis:  </label>
-                <DropdownMenu options={["Yes","No","Unknown"]} />
+                <DropdownMenu options={['White', 'Black', 'Hispanic']} onChange={(e)=>setEthnicity(e.target.value)}/>
                 <br/>
-                <span className="sidenote">Surgical necrotizing enterocolitis should only be entered for postnatal days 14 and 28.</span>
-                <br></br><br></br>
 
-                {/* used in BPD calculator and EPBO calculator */}
-                <label htmlFor="FiO2">FiO2<sup>1</sup> (grams):  </label>
-                <textarea rows="1" cols="4" id="FiO2" name="FiO2" onChange={null}></textarea> 
+                <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
+                <DropdownMenu options={['True', 'False']} onChange={(e)=>setRupturedMembrane(e.target.value)}/>
                 <br/>
-                <span className="sidenote">Please enter a value between 21 and 100.</span>
-                <br></br><br></br>
+
+                <div id="length_of_ruptured_membrane" hidden>
+                <label> Length of Ruptured Membrane:  </label><br/>
+                <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onChange={(e)=>setLengthOfRupturedMembrane(e.target.value)}/>
+                <br/></div>
+
+                <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>
+                <DropdownMenu options={['True', 'False']} onChange={(e)=>setPreEclampsia(e.target.value)}/>
+                <br/>
+
+                <br/>
 
                     {/* only relevant for the GPT prompt */}
-                <label htmlFor="clenician_notes">Additional Notes:  </label>
+                <label htmlFor="clinician_notes">Additional Notes:  </label>
                 <br/>
-                <textarea rows="9" cols="100" id="clenician_notes" name="clenician_notes" onChange={null}></textarea> 
+                <textarea rows="9" cols="80" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
                 <br/><br/>
+
+                
+
                 </div>
                 {/* buttons for document creation */}
+                
                 <div className='navBarBottom'>
-                <br></br>
+                <br/>
                 <GradientButton 
                     type="submit" 
                     text="Create Prenatal Consult Docs"
                     // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
-                    onClick={async () => {
-
-                    }}
-                />
-                <br></br>
-                <GradientButton 
-                    type="submit" 
-                    text="Create First Week of Life Handout"
-                    // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
-                    onClick={async () => {
-
-                    }}
-                />
-                <br></br>
-                <GradientButton 
-                    type="submit" 
-                    text="Create Continued Expectations Docs"
-                    // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
-                    onClick={async () => {
-
-                    }}
+                    onClick={documentRequest}
                 />
                 <br></br>
                 <br></br>

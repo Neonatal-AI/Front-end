@@ -41,17 +41,20 @@ body {
   }
 h1 {
   color: white;
-  font-family: 'Monoton';
+  font-family: 'Monoton', monospace;
   font-size: 40px;
   font-weight: 400;
   padding: auto;
+}
+a{
+  color:rgb(0, 0, 0)
 }
 p {
   color: white;
   border-radius: 20px;
   box-shadow: rgba(0,212,255,.15) 0 20px 20px,
   rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
+  rgba(8, 28, 32, 0.15) 0 2px 10px;
   background:  rgba(64, 64, 64, 0.95);
 }
 select{
@@ -79,6 +82,7 @@ option{
   text-align: center;
 }
 button {
+  font-size: x-large;
   color: white;
   cursor: crosshair;
   border:rgba(64, 64, 64, 0.5);
@@ -200,12 +204,20 @@ textarea{
   font-weight: 300;
 } */
 
-
-.inputArea {
-  position: absolute;
-  bottom: 0%;
+.inputForm{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.inputData {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  width: 35vw;
+  height: 80vh;
   text-align: left;
   align-content: left;
+  align-items: flex-start;
 }
 .dropdown {
   position: relative;
@@ -223,6 +235,7 @@ textarea{
   text-align: center;
 }
 .dropdown-header {
+  z-index: 1000;
   width: 100px;
   color: white;
   cursor: crosshair;
@@ -236,6 +249,7 @@ textarea{
   text-align: center;
 }
 .dropdown-options {
+  z-index: 1001;
   width: 100px;
   position: absolute;
   color: white;

@@ -19,8 +19,8 @@ const App = () => {
     return (
       <nav>
         {/* only want this to render on page if user does not have a valid session cookie */}
-        {!sessionCookie && <Link to="/login"><font size="+2">Login |</font> </Link>}
-        {!sessionCookie && <Link to="/register"><font size="+2">Register |</font> </Link>}
+        {!sessionCookie && <Link to="/login"><font size="+2">Privacy |</font> </Link>}
+        {!sessionCookie && <Link to="/register"><font size="+2">Disclaimer |</font> </Link>}
 
         {/* only want this to render on page if user does have a valid session cookie */}
         {!sessionCookie && <Link to="/main"><font size="+2">Main</font></Link>}

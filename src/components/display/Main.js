@@ -70,9 +70,10 @@ const Main = () => {
                     language: language
                 }
             }
+
         // console.log(document)
         try {
-            const response = await fetch(`${API_URL}/`, {
+            const response = await fetch(`${API_URL}/createDocs`, {
                 method: 'POST',
                 credentials: 'include', 
                 headers: {

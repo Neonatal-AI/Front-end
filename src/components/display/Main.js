@@ -206,15 +206,15 @@ const Main = () => {
                     {/* literacy level */}
                 <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/perf_levels.asp">literacy level</a>:</label>
                 <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
-                <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onChange={(e)=>setLiteracyLevel(e.target.value)}/>
+                <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onSelect={(e)=>setLiteracyLevel(e.target.value)}/>
                 <br/>
 
                     {/* Translation? */}
                 <label htmlFor="translate">Do they need this document translated?  </label>
-                <DropdownMenu options={["Yes", "No"]} onChange={(e)=>setTranslate(e.target.value)}/>
+                <DropdownMenu options={["Yes", "No"]} onSelect={(e)=>setTranslate(e.target.value)}/>
                 <br/>
                 <div hidden><label htmlFor="translation_language">Language:  </label> <br/>
-                <DropdownMenu id="translateion_language" options={["Spanish", "Mandarin"]} onChange={(e)=>setLanguage(e.target.value)}/></div>
+                <DropdownMenu id="translateion_language" options={["Spanish", "Mandarin"]} onSelect={(e)=>setLanguage(e.target.value)}/></div>
                 <br/>
 
                 </div>
@@ -223,7 +223,7 @@ const Main = () => {
                 <h2>Patient Information</h2>
                     {/* used in BPD calculator and EPBO calculator */}
                 <label>Estimated Gestational Age (weeks):  </label>
-                <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onChange={(e)=>setGestationalAge(e.target.value)}/>
+                <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onSelect={(e)=>setGestationalAge(e.target.value)}/>
                 <br/>
 
                     {/* used in BPD calculator and EPBO calculator */}
@@ -234,36 +234,36 @@ const Main = () => {
 
                     {/* used in BPD calculator only */}
                 <label>Singleton birth: </label>
-                <DropdownMenu options={['True', 'False']} onChange={(e)=>setSingleton(e.target.value)}/>
+                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSingleton(e.target.value)}/>
                 <br/>
 
                     {/* used in BPD calculator only */}
                 <label>Antenatal Steroids: </label>
                 <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
-                <DropdownMenu options={['True', 'False']} onChange={(e)=>setSteroids(e.target.value)}/>
+                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSteroids(e.target.value)}/>
                 <br/>
 
                     {/* used in BPD calculator and EPBO calculator */}
                 <label>Infant sex: </label>
-                <DropdownMenu options={['Male', 'Female']} onChange={(e)=>setSex(e.target.value)}/>
+                <DropdownMenu options={['Male', 'Female']} onSelect={(e)=>setSex(e.target.value)}/>
                 <br/>
 
                    {/* used in BPD calculator only */}
                 <label htmlFor="ethnicity">Race / Ethnicity:  </label>
-                <DropdownMenu options={['White', 'Black', 'Hispanic']} onChange={(e)=>setEthnicity(e.target.value)}/>
+                <DropdownMenu options={['White', 'Black', 'Hispanic']} onSelect={(e)=>setEthnicity(e.target.value)}/>
                 <br/>
 
                 <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
-                <DropdownMenu options={['True', 'False']} onChange={(e)=>setRupturedMembrane(e.target.value)}/>
+                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setRupturedMembrane(e.target.value)}/>
                 <br/>
 
                 <div id="length_of_ruptured_membrane" hidden>
                 <label> Length of Ruptured Membrane:  </label><br/>
-                <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onChange={(e)=>setLengthOfRupturedMembrane(e.target.value)}/>
+                <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onSelect={(e)=>setLengthOfRupturedMembrane(e.target.value)}/>
                 <br/></div>
 
                 <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>
-                <DropdownMenu options={['True', 'False']} onChange={(e)=>setPreEclampsia(e.target.value)}/>
+                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setPreEclampsia(e.target.value)}/>
                 <br/>
 
                 <br/>

@@ -8,7 +8,9 @@ const DropdownMenu = ({ label, options }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = (e, option) => {
+    e.stopPropogation()
+    onSelect(option);
     setSelectedOption(option);
     setIsOpen(!isOpen); // Close the dropdown after selecting an option
   };
@@ -24,7 +26,7 @@ const DropdownMenu = ({ label, options }) => {
             <div
               key={index}
               className="dropdown-option"
-              onClick={() => handleOptionClick(option)}
+              onClick={(e) => handleOptionClick(e, option)}
             >
               {option}
             </div>

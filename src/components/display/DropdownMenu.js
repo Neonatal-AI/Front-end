@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DropdownMenu = ({ label, options }) => {
+const DropdownMenu = ({ label, options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -9,16 +9,15 @@ const DropdownMenu = ({ label, options }) => {
   };
 
   const handleOptionClick = (e, option) => {
-    e.stopPropogation()
     onSelect(option);
     setSelectedOption(option);
     setIsOpen(!isOpen); // Close the dropdown after selecting an option
   };
 
   return (
-    <span className="dropdown" onClick={toggleDropdown}>
+    <div className="dropdown" onClick={toggleDropdown} role="button" tabIndex="0" aria-haspopup="true" aria-expanded={isOpen}>
       <span className="dropdown-header" >
-        {selectedOption || 'Select'}
+        {selectedOption || label || 'Select'}
       </span>
       {isOpen && (
         <div className="dropdown-options">
@@ -33,7 +32,7 @@ const DropdownMenu = ({ label, options }) => {
           ))}
         </div>
       )}
-    </span>
+    </div>
   );
 };
 

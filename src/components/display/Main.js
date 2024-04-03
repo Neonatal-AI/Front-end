@@ -85,6 +85,7 @@ const Main = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`);
             }
+            console.log(response)
             const data = await response.json();
             console.log(data)
         } catch (error) {

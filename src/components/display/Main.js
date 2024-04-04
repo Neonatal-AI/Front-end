@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import DropdownMenu from './DropdownMenu';
 
 const Main = () => {
-    // variables and hooks
+        // variables and hooks
     const sessionCookie = Cookies.get('session')
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
@@ -34,7 +34,7 @@ const Main = () => {
     // const [ViewResume, setViewResume] = useState(null)
 
     const [view, setView] = useState('input') // toggle for view selection
-
+    
 
     // a bunch of function expressions
 
@@ -59,10 +59,10 @@ const Main = () => {
 
     const documentRequest = async () => {
         const document = {
-            //  data we are using to generate documents: 
+        //  data we are using to generate documents: 
             // Date, user agreement cookie, input fields, output options...
-                date: new Date(),
-                userid: sessionCookie,
+        date: new Date(),
+        userid: sessionCookie,
                 inputFields: {
                     gestational_age: gestational_age,
                     birth_weight: birth_weight,
@@ -85,88 +85,26 @@ const Main = () => {
         // console.log(document)
         try {
             const response = await fetch(`${API_URL}/createDocs`, {
-                method: 'POST',
-                credentials: 'include', 
-                headers: {
-                'Content-Type': 'application/json',
-                id: sessionCookie
-                },
-                body: JSON.stringify(document),
-            })
-            if (!response.ok) {
-                throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
-            }
-            console.log(response)
+            method: 'POST',
+            credentials: 'include', 
+            headers: {
+            'Content-Type': 'application/json',
+            id: sessionCookie
+            },
+            body: JSON.stringify(document),
+        })
+        if (!response.ok) {
+            throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
+        }
+        console.log(response)
             const data = await response.json()
-            console.log(data)
+        console.log(data)
         } catch (error) {
-            console.error('There was a problem with the fetch operation:', error)
+        console.error('There was a problem with the fetch operation:', error)
         }
     }
 
-    // const historyPost = async () => {
-    //     // doc to send to database
-    //     const document = {
-    //         date: new Date(),
-    //         userid: sessionCookie
-    //     }
-    //     try {
-    //     const response = await fetch(`${API_URL}/historyPost`, {
-    //         method: 'POST',
-    //         credentials: 'include', 
-    //         headers: {
-    //         'Content-Type': 'application/json',
-    //         id: sessionCookie
-    //         },
-    //         body: JSON.stringify(document),
-    //     })
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`);
-    //     }
-    //     const data = await response.json();
-    //     console.log(data)
-    //     } catch (error) {
-    //     console.error('There was a problem with the fetch operation:', error)
-    //     }
-    // }
-
-    // // use effect to update values of display fields
-    // // yeah yeah yeah but we really want to use sockets
-    // useEffect(() => {
-    //     if (/*optimizedResume !== null && optimizedCover !== null && jobSummary !== null && assessment !== null*/null) {
-    //         historyPost(); // function to post data to database 
-    //         // setViewResume(optimizedResume);
-    //         // setViewCover(optimizedCover);
-    //         // setViewAssessment(assessment);
-    //         resetHooks()
-    //         setView('resume');
-    //     alert("Your application docs are ready!")
-    //     }
-    // }, [/*optimizedResume, optimizedCover, jobSummary, assessment*/ ]); //these are the items "watched" by useEffect here
-    
-    // // using effect to update history when the page refreshes
-    // // yeah yeah yeah but we really want to use sockets but this is still useful
-    // useEffect(() => {
-    //     try{
-    //         const fetchHistory = async () => {
-    //             const response = await fetch(`${API_URL}/historyGet`, {
-    //                 method: 'GET',
-    //                 credentials: 'include', 
-    //                 headers:{
-    //                     id: sessionCookie
-    //                 }
-    //             });
-
-    //             const data = await response.json();
-    //             setHistoryData(data);
-    //             }
-    //     fetchHistory();
-    //     }catch (error) {
-    //     console.log(error)
-    //     alert("OH NO! we couldn't get the history from the server.")
-    //     }
-    // }, []);
-    
+      
     return (
         <div className="app">
             
@@ -232,12 +170,12 @@ const Main = () => {
                 </div>
                 {/* input fields */}
                 <div className='inputData'>
-                <h2>Patient Information</h2>
+<h2>Patient Information</h2>
                     {/* used in BPD calculator and EPBO calculator */}
                 <label>Estimated Gestational Age (weeks):  </label>
                 <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onSelect={(e)=>setGestationalAge(e)}/>
                 <br/>
-
+                
                     {/* used in BPD calculator and EPBO calculator */}
                 <label>Estimated birth weight (grams):  </label>
                 <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
@@ -251,7 +189,7 @@ const Main = () => {
 
                     {/* used in BPD calculator only */}
                 <label>Antenatal Steroids: </label>
-                <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
+                                <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
                 <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSteroids(e)}/>
                 <br/>
 
@@ -265,7 +203,7 @@ const Main = () => {
                 <DropdownMenu options={['White', 'Black', 'Hispanic']} onSelect={(e)=>setEthnicity(e)}/>
                 <br/>
 
-                <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
+                   <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
                 <DropdownMenu options={['True', 'False']} onSelect={(e)=>setRupturedMembrane(e)}/>
                 <br/>
 
@@ -277,9 +215,9 @@ const Main = () => {
                 <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>
                 <DropdownMenu options={['True', 'False']} onSelect={(e)=>setPreEclampsia(e)}/>
                 <br/>
-
-                <br/>
-
+                
+                                <br/>
+                
                     {/* only relevant for the GPT prompt */}
                 <label htmlFor="clinician_notes">Additional Notes:  </label>
                 <br/>
@@ -290,7 +228,7 @@ const Main = () => {
 
                 </div>
                 {/* buttons for document creation */}
-                
+
                 <div className='navBarBottom'>
                 <br/>
                 <GradientButton 
@@ -317,55 +255,7 @@ const Main = () => {
             )}
 
             {/*  */}
-            {view === 'resume' && (
-            <div>
-                <div className='navBarTop'>
-                <button onClick={() => setView('resume')}>View Resume</button> <br></br>
-                <button onClick={() => setView('coverLetter')}>View cover letter</button> <br></br>
-                <button onClick={() => setView('jobFit')}>View Assessment</button>
-                </div>
-                <div className='displayArea'>
-                <p>Optimized Resume:</p>
-                {/* <p dangerouslySetInnerHTML={{__html: ViewResume}} /> */}
-                </div>
-                <div className='bottomButtons'>
-                <button onClick={() => window.location.reload()}>Reload</button>
-                </div>
-            </div>
-            )}
-            {view === 'coverLetter' && (
-            <div>
-                <div className='navBarTop'>
-                <button onClick={() => setView('resume')}>View Resume</button> <br></br>
-                <button onClick={() => setView('coverLetter')}>View cover letter</button> <br></br>
-                <button onClick={() => setView('jobFit')}>View Assessment</button>
-                </div>
-                <div className='displayArea'>
-                <p>Optimized Cover Letter: </p>
-                {/* <p dangerouslySetInnerHTML={{__html: ViewCover}} /> */}
-                </div>
-            <div className='bottomButtons'>
-                <button onClick={() => window.location.reload()}>Reload</button>
-            </div>
-            </div>
-            )}
-            {view === 'jobFit' && (
-            <div>
-                <div className='navBarTop'>
-                    {/* we could use a simialr toggle for selecting what you want to create */}
-                <button onClick={() => setView('resume')}>View Resume</button> <br></br>
-                <button onClick={() => setView('coverLetter')}>View cover letter</button> <br></br>
-                <button onClick={() => setView('jobFit')}>View Assessment</button>
-                </div>
-                <div className='displayArea'>
-                <p> Assessment: </p>
-                {/* <p dangerouslySetInnerHTML={{__html: ViewAssessment}} /> */}
-                </div>
-                <div className='bottomButtons'>
-                <button onClick={() => window.location.reload()}>Reload</button>
-                </div>
-            </div>
-            )}
+            
         </section>
         </div>
     );

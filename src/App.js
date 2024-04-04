@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 // internal components
-import { UserProvider } from './context/Provider'
+// import { UserProvider } from './context/Provider'
 import Login from './components/display/Login'
 import RegistrationForm from './components/display/AccountCreation'
 import Main from './components/display/Main'
-import deleteCookies from './components/CookieRemoval'
+// import deleteCookies from './components/CookieRemoval'
 import GradientButton from './components/common/GradientButton'
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
         {/* only want this to render on page if user does have a valid session cookie */}
         {!sessionCookie && <Link to="/main"><font size="+2">Main</font></Link>}
         <br/>
-        {!sessionCookie && <GradientButton 
+        {/* {!sessionCookie && <GradientButton 
         className="logout"
         type="submit" 
         text="LOGOUT"
@@ -36,14 +36,14 @@ const App = () => {
           setLoginLoading(false)
           window.location.reload()
         }}
-      />}
+      />} */}
 
       </nav>
     )
   }
 
   return (
-    <UserProvider>
+    // <UserProvider>
     <Router>
       <Navigation />
       <Routes>
@@ -56,7 +56,7 @@ const App = () => {
         )}      
       </Routes>
     </Router>
-    </UserProvider>
+    // </UserProvider>
   )
 
 }

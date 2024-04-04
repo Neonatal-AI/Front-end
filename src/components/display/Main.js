@@ -30,17 +30,12 @@ const Main = () => {
     const [language, setLanguage] = useState(null)
 
 
-    // relevant to setting the document to be displayed. Might eb something we use... might not
-    // const [ViewResume, setViewResume] = useState(null)
-
     const [view, setView] = useState('input') // toggle for view selection
     
 
     // a bunch of function expressions
 
     const resetHooks = () => {
-        // an example of resetting the hook, we might want to do something like this with the Neonatal project
-        // in particular, we might want to utilize hooks to display items from the history sidebar
         setGestationalAge(null)
         setBirthWeight(null)
         setSingleton(null)
@@ -59,8 +54,6 @@ const Main = () => {
 
     const documentRequest = async () => {
         const document = {
-        //  data we are using to generate documents: 
-            // Date, user agreement cookie, input fields, output options...
         date: new Date(),
         userid: sessionCookie,
                 inputFields: {
@@ -81,8 +74,6 @@ const Main = () => {
                     language: language
                 }
             }
-
-        // console.log(document)
         try {
             const response = await fetch(`${API_URL}/createDocs`, {
             method: 'POST',
@@ -107,126 +98,85 @@ const Main = () => {
       
     return (
         <div className="app">
-            
-            {/* the history sidebar */}
-        {/* <section className="side-bar"> */}
-
-            {/* this MIGHT be a router component later...*/}
-            {/* <button onClick={() => setView('input')}> */}
-            {/* + Create clerical documents */}
-            {/* </button> */}
-
-            {/* this MIGHT be a router component later...*/}
-            {/* <ul className="history"> */}
-            {/* {historyData.map((item, index) => ( */}
-                {/* <li key={index} onClick={() => { */}
-                    {/* // this is where we will set the view to the historical clerical document */}
-                {/* // setViewResume(item.optimizedResume); */}
-                {/* // setViewCover(item.optimizedCover); */}
-                {/* // setViewAssessment(item.assessment); */}
-                {/* setView('resume') */}
-            {/* }}> */}
-                {/* Display relevant fields from item */}
-                {/* {item.date.slice(0,10)} */}
-                {/* {<br></br>} */}
-                {/* {item.date.slice(10,-5)} */}
-                {/* {<br></br>} */}
-                {/* {<br></br>} */}
-                {/* {item.summary} */}
-                {/* </li> */}
-            {/* ))} */}
-            {/* </ul> */}
-            {/* <nav> */}
-            {/* <image src="../../../public/norton.jpg" alt="norton logo" style="width: 100px; height: 100px;"/> */}
-            {/* <p>This section contains historical clerical documents</p> */}
-            {/* </nav> */}
-        {/* </section> */}
-
-        {/* this will be a router component*/}
         <section className='main'>
-            {/* just the title */}
             <h1>Neonatal Assistant</h1>
-
-
             {view === 'input' && (
             <div className="inputForm">
                 
                 <div className="inputData">
                 <h2>Output Options</h2>
-                    {/* literacy level */}
-                <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/perf_levels.asp">literacy level</a>:</label>
-                <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
-                <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onSelect={(e)=>setLiteracyLevel(e)}/>
-                <br/>
+                    <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/perf_levels.asp">literacy level</a>:</label>
+                    <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
+                    <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onSelect={(e)=>setLiteracyLevel(e)}/>
+                    <br/>
 
-                    {/* Translation? */}
-                <label htmlFor="translate">Do they need this document translated?  </label>
-                <DropdownMenu options={["Yes", "No"]} onSelect={(e)=>setTranslate(e)}/>
-                <br/>
-                <div hidden><label htmlFor="translation_language">Language:  </label> <br/>
-                <DropdownMenu id="translateion_language" options={["Spanish", "Mandarin"]} onSelect={(e)=>setLanguage(e)}/></div>
-                <br/>
+                    <label htmlFor="translate">Do they need this document translated?  </label>
+                    <DropdownMenu options={["Yes", "No"]} onSelect={(e)=>setTranslate(e)}/>
+                    <br/>
+                    <div hidden><label htmlFor="translation_language">Language:  </label> <br/>
+                    <DropdownMenu id="translateion_language" options={["Spanish", "Mandarin"]} onSelect={(e)=>setLanguage(e)}/></div>
+                    <br/>
 
-                </div>
+                    </div>
                 {/* input fields */}
-                <div className='inputData'>
-<h2>Patient Information</h2>
-                    {/* used in BPD calculator and EPBO calculator */}
-                <label>Estimated Gestational Age (weeks):  </label>
-                <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onSelect={(e)=>setGestationalAge(e)}/>
-                <br/>
-                
-                    {/* used in BPD calculator and EPBO calculator */}
-                <label>Estimated birth weight (grams):  </label>
-                <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
-                <textarea rows="1" cols="4" id="birth_weight" name="birth_weight" onChange={(e)=>setBirthWeight(e.target.value)}></textarea> 
-                <br/>
+                <div className='inputData'> 
+                    <h2>Patient Information</h2>
+                        {/* used in BPD calculator and EPBO calculator */}
+                    <label>Estimated Gestational Age (weeks):  </label>
+                    <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onSelect={(e)=>setGestationalAge(e)}/>
+                    <br/>
+                    
+                        {/* used in BPD calculator and EPBO calculator */}
+                    <label>Estimated birth weight (grams):  </label>
+                    <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
+                    <textarea rows="1" cols="4" id="birth_weight" name="birth_weight" onChange={(e)=>setBirthWeight(e.target.value)}></textarea> 
+                    <br/>
+
+                        {/* used in BPD calculator only */}
+                    <label>Singleton birth: </label>
+                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSingleton(e)}/>
+                    <br/>
+
+                        {/* used in BPD calculator only */}
+                    <label>Antenatal Steroids: </label>
+                                    <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
+                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSteroids(e)}/>
+                    <br/>
+
+                        {/* used in BPD calculator and EPBO calculator */}
+                    <label>Infant sex: </label>
+                    <DropdownMenu options={['Male', 'Female']} onSelect={(e)=>setSex(e)}/>
+                    <br/>
 
                     {/* used in BPD calculator only */}
-                <label>Singleton birth: </label>
-                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSingleton(e)}/>
-                <br/>
+                    <label htmlFor="ethnicity">Race / Ethnicity:  </label>
+                    <DropdownMenu options={['White', 'Black', 'Hispanic']} onSelect={(e)=>setEthnicity(e)}/>
+                    <br/>
 
-                    {/* used in BPD calculator only */}
-                <label>Antenatal Steroids: </label>
-                                <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
-                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSteroids(e)}/>
-                <br/>
+                    <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
+                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setRupturedMembrane(e)}/>
+                    <br/>
 
-                    {/* used in BPD calculator and EPBO calculator */}
-                <label>Infant sex: </label>
-                <DropdownMenu options={['Male', 'Female']} onSelect={(e)=>setSex(e)}/>
-                <br/>
+                    <div id="length_of_ruptured_membrane" hidden>
+                    <label> Length of Ruptured Membrane:  </label><br/>
+                    <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onSelect={(e)=>setLengthOfRupturedMembrane(e)}/>
+                    <br/></div>
 
-                   {/* used in BPD calculator only */}
-                <label htmlFor="ethnicity">Race / Ethnicity:  </label>
-                <DropdownMenu options={['White', 'Black', 'Hispanic']} onSelect={(e)=>setEthnicity(e)}/>
-                <br/>
+                    <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>
+                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setPreEclampsia(e)}/>
+                    <br/>
+                    
+                                    <br/>
+                    
+                        {/* only relevant for the GPT prompt */}
+                    <label htmlFor="clinician_notes">Additional Notes:  </label>
+                    <br/>
+                    <textarea rows="9" cols="80" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
+                    <br/><br/>
 
-                   <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
-                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setRupturedMembrane(e)}/>
-                <br/>
+                    
 
-                <div id="length_of_ruptured_membrane" hidden>
-                <label> Length of Ruptured Membrane:  </label><br/>
-                <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onSelect={(e)=>setLengthOfRupturedMembrane(e)}/>
-                <br/></div>
-
-                <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>
-                <DropdownMenu options={['True', 'False']} onSelect={(e)=>setPreEclampsia(e)}/>
-                <br/>
-                
-                                <br/>
-                
-                    {/* only relevant for the GPT prompt */}
-                <label htmlFor="clinician_notes">Additional Notes:  </label>
-                <br/>
-                <textarea rows="9" cols="80" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
-                <br/><br/>
-
-                
-
-                </div>
+                    </div>
                 {/* buttons for document creation */}
 
                 <div className='navBarBottom'>

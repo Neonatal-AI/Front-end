@@ -171,7 +171,7 @@ const Main = () => {
                         {/* only relevant for the GPT prompt */}
                     <label htmlFor="clinician_notes">Additional Notes:  </label>
                     <br/>
-                    <textarea rows="9" cols="80" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
+                    <textarea rows="9" cols="60" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
                     <br/><br/>
 
                     

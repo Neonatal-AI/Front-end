@@ -70,7 +70,7 @@ const Main = () => {
     const documentRequest = async () => {
         const document = {
             date: new Date(),
-userid: sessionCookie,
+            userid: sessionCookie,
             inputFields: {
                 gestational_age: gestational_age,
                 birth_weight: birth_weight,
@@ -92,7 +92,7 @@ userid: sessionCookie,
         try {
             console.log(document)
             const response = await fetch(`${API_URL}/createDocs`, {
-                method: 'POST',
+                method: 'GET',
                 credentials: 'include', 
                 headers: {
                 'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ userid: sessionCookie,
                 throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
             }
             console.log(response)
-            const data = await response
+            const data = await response.json()
             console.log(data)
         } catch (error) {
         console.error('There was a problem with the fetch operation:', error)

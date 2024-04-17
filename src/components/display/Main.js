@@ -207,7 +207,7 @@ userid: sessionCookie,
                     
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
-                        await documentRequest();
+                        documentRequest();
                         resetHooks();
                         visibilityToggle('false', "loading");
                         setView('output');

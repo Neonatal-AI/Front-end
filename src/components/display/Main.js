@@ -69,43 +69,41 @@ const Main = () => {
 
     const documentRequest = async () => {
         const document = {
-        date: new Date(),
-        userid: sessionCookie,
-                inputFields: {
-                    gestational_age: gestational_age,
-                    birth_weight: birth_weight,
-                    singleton: singleton,
-                    steroids: steroids,
-                    sex: sex,
-                    ethnicity: ethnicity,
-                    ruptured_membrane: ruptured_membrane,
-                    length_of_ruptured_membrane:length_of_ruptured_membrane,
-                    pre_eclampsia:pre_eclampsia,
-                    clinician_notes:clinician_notes
-                },
-                outputOptions: {
-                    literacy_level: literacy_level,
-                    translate: translate,
-                    language: language
-                }
+            date: new Date(),
+            inputFields: {
+                gestational_age: gestational_age,
+                birth_weight: birth_weight,
+                singleton: singleton,
+                steroids: steroids,
+                sex: sex,
+                ethnicity: ethnicity,
+                ruptured_membrane: ruptured_membrane,
+                length_of_ruptured_membrane:length_of_ruptured_membrane,
+                pre_eclampsia:pre_eclampsia,
+                clinician_notes:clinician_notes
+            },
+            outputOptions: {
+                literacy_level: literacy_level,
+                translate: translate,
+                language: language
             }
+        }
         try {
             console.log(document)
             const response = await fetch(`${API_URL}/createDocs`, {
-            method: 'POST',
-            credentials: 'include', 
-            headers: {
-            'Content-Type': 'application/json',
-            id: sessionCookie
-            },
-            body: JSON.stringify(document),
-        })
-        if (!response.ok) {
-            throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
-        }
-        console.log(response)
+                method: 'POST',
+                credentials: 'include', 
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(document),
+            })
+            if (!response.ok) {
+                throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
+            }
+            console.log(response)
             const data = await response.json()
-        console.log(data)
+            console.log(data)
         } catch (error) {
         console.error('There was a problem with the fetch operation:', error)
         }

@@ -213,7 +213,7 @@ const Main = () => {
                         visibilityToggle('true', "loading");
                         let consult = await Promise.allSettled([documentRequest()]);
                         console.log(consult[0].value)
-                        setPrenatalConsult(consult.toString())
+                        setPrenatalConsult(consult[0].value)
                         resetHooks();
                         visibilityToggle('false', "loading");
                         setView('output');

@@ -29,6 +29,8 @@ const Main = () => {
     const [translate, setTranslate] = useState(null)
     const [language, setLanguage] = useState(null)
 
+    // 
+    const [prenatalConsult, setPrenatalConsult] = useState(null)
 
     const [view, setView] = useState('input') // toggle for view selection
     
@@ -106,6 +108,7 @@ const Main = () => {
             console.log(response)
             let data = await response.json()
             console.log("data: ", data.choices[0].message.content.toString())
+            return data.choices[0].message.content.toString()
             
         } catch (error) {
         console.error('There was a problem with the fetch operation:', error)
@@ -208,7 +211,8 @@ const Main = () => {
                     
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
-                        await Promise.allSettled([documentRequest()]);
+                        let consult = await Promise.allSettled([documentRequest()]);
+                        setPrenatalConsult(consult)
                         resetHooks();
                         visibilityToggle('false', "loading");
                         setView('output');
@@ -222,6 +226,9 @@ const Main = () => {
             )}
             {view=== 'output' &&
             <div className="outputForm">
+                <button onClick={() => setView('input')}>submit another form</button> 
+                <br></br>
+                <p dangerouslySetInnerHTML={{__html: prenatalConsult}} />
             </div>}
             {/* this is the page loading view. no big deal, really... but important nonetheless */}
             

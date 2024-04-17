@@ -95,7 +95,8 @@ const Main = () => {
                 method: 'POST',
                 credentials: 'include', 
                 headers: {
-                id: sessionCookie
+                    'Content-Type': 'application/json',
+                    id: sessionCookie
                 },
                 body: JSON.stringify(document),
             })

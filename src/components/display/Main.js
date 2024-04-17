@@ -105,7 +105,7 @@ const Main = () => {
             }
             console.log(response)
             let data = await response.json()
-            console.log("data: ", data)
+            console.log("data: ", data.choices[0].message.content.toString())
             
         } catch (error) {
         console.error('There was a problem with the fetch operation:', error)

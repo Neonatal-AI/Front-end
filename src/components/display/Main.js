@@ -205,7 +205,7 @@ const Main = () => {
                     
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
-                        await Promise.settled([documentRequest()]);
+                        await Promise.allSettled([documentRequest()]);
                         resetHooks();
                         visibilityToggle('false', "loading");
                         setView('output');

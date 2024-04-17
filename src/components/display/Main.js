@@ -96,7 +96,7 @@ userid: sessionCookie,
                 credentials: 'include', 
                 headers: {
                 'Content-Type': 'application/json',
-            id: sessionCookie
+                id: sessionCookie
                 },
                 body: JSON.stringify(document),
             })
@@ -207,7 +207,7 @@ userid: sessionCookie,
                     
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
-                        await Promise.allSettled([documentRequest()]);
+                        await documentRequest();
                         resetHooks();
                         visibilityToggle('false', "loading");
                         setView('output');

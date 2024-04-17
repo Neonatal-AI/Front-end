@@ -107,7 +107,7 @@ const Main = () => {
             }
             console.log(response)
             let data = await response.json()
-            console.log("data: ", data.choices[0].message.content.toString())
+            // console.log("data: ", data.choices[0].message.content.toString())
             return data.choices[0].message.content.toString()
             
         } catch (error) {
@@ -212,6 +212,7 @@ const Main = () => {
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
                         let consult = await Promise.allSettled([documentRequest()]);
+                        console.log(consult)
                         setPrenatalConsult(consult.toString())
                         resetHooks();
                         visibilityToggle('false', "loading");

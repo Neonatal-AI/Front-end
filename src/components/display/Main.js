@@ -92,7 +92,7 @@ const Main = () => {
         try {
             console.log(document)
             const response = await fetch(`${API_URL}/createDocs`, {
-                method: 'GET',
+                method: 'POST',
                 credentials: 'include', 
                 headers: {
                 'Content-Type': 'application/json',

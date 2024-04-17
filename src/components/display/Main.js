@@ -212,7 +212,7 @@ const Main = () => {
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
                         let consult = await Promise.allSettled([documentRequest()]);
-                        console.log(consult)
+                        console.log(consult[0].value)
                         setPrenatalConsult(consult.toString())
                         resetHooks();
                         visibilityToggle('false', "loading");

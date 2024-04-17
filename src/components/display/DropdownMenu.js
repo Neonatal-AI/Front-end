@@ -8,8 +8,14 @@ const DropdownMenu = ({ label, options, onSelect }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (e, option) => {
+const handleOptionClick = (e, option) => {
+  if (typeof onSelect === 'function') {
     onSelect(option);
+  } else if (Array.isArray(onSelect)) {
+    onSelect.forEach(func => {
+      func(option);
+    });
+  }
     setSelectedOption(option);
     setIsOpen(!isOpen); // Close the dropdown after selecting an option
   };

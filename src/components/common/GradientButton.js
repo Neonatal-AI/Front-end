@@ -10,10 +10,6 @@ const GradientButton = ({
   loading,
   onClick
 }) => {
-  const classes = classNames({
-    'flex rounded-full items-center py-2 px-6 bg-gradient focus:outline-none shadow-lg text-black': true,
-    'text-2xl': size === '2xl'
-  });
   return (
     <button
       type={type}

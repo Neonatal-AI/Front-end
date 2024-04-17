@@ -5,11 +5,11 @@
 
 * {
   color: white;
-  font-family: 'Roboto Mono', sans-sarif; 
+  font-family: 'Roboto Mono', monospace;
 }
 
 /* animation keyframe */
-@keyframes change {
+@keyframes gradientChange {
   0% {
     background-color: #000000;
   }
@@ -26,25 +26,56 @@
     background-color: #000000;
   }
 }
+@keyframes gradientMove {
+  0% {
+    background-position: 0 0;
+  }
+  65% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+@keyframes bounce {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transform: translateY(0);
+  }
+  10%{
+    transform: translateY(-30px);
+  }
+  30% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  70% {
+    transform: translateY(-5px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
 
 /* formatting for generic HTML tag types */
 body {
   color: white;
   margin: 0;
-  padding: o;
+  padding: 0;
   background-image: url("./images/transluscentgradient2.png");
   background-attachment: fixed;
   background-repeat: no-repeat, repeat;
   background-size: cover; 
   display: flex;
-  animation: change 60s ease-out infinite;
+  animation: gradientChange 60s ease-out infinite;
   }
 h1 {
   color: white;
-  font-family: 'Monoton', monospace;
+  font-family: 'Monoton', monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 40px;
   font-weight: 400;
-  padding: auto;
+  padding: 40px;
 }
 a{
   color:rgb(0, 0, 0)
@@ -57,50 +88,44 @@ p {
   rgba(8, 28, 32, 0.15) 0 2px 10px;
   background:  rgba(64, 64, 64, 0.95);
 }
-select{
-  color: white;
-  cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
-  text-align: center;
-}
-option{
-  color: white;
-  cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
-  text-align: center;
-}
 button {
+  display: flex;
   font-size: x-large;
-  color: white;
   cursor: crosshair;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
-  background: linear-gradient(270deg, rgba(0, 145, 75, 0.727)0%, rgba(15, 125, 235, 0.727)100%);
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(15, 125, 235, 0.425)100%);
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
+} 
+button:hover {
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(15, 125, 235, 0.425)100%);
+  background-size: 200% 100%;
   box-shadow: rgba(0,212,255,.15) 0 20px 20px,
   rgba(0,212,255,.15) 0 -8px 18px,
   rgba(0,212,255,.15) 0 2px 10px;
   align-content: center;
   text-align: center;
+  animation: gradientMove 2s linear infinite;
 } 
-nav p {
-  color: white;
-  border-top: solid o.5px rgba(255,255,255,1);
-  font-weight: 400;
+button:focus {
+  border:rgb(255, 255, 255);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.733);
+  background-size: 200% 100%;
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  align-content: center;
   text-align: center;
-  font-size: small;
-}
+  animation: bounce 2s linear;
+} 
+
 label {
   color: white;
   border-radius: 20px;
@@ -113,6 +138,7 @@ label {
 textarea{
   color: white;
   cursor: crosshair;
+  display:flex;
   flex-wrap: wrap;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
@@ -120,7 +146,7 @@ textarea{
   box-shadow: rgba(0,212,255,.15) 0 20px 20px,
   rgba(0,212,255,.15) 0 -8px 18px,
   rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
+  align-content: normal;
   text-align: center;
   resize: both;
 }
@@ -142,41 +168,7 @@ textarea{
   width: 83vw;
   overflow-y: auto;
 }
-.buttonArea {
-  color: white;
-  text-align: center;
-  align-content: center;
-}
-.topButtons{
-  color: white;
-  align-items: start;
-}
-.bottomButtons{
-  color: white;
-  align-items: end;
-}
-.side-bar {
-  background: rgba(64, 64, 64, 0.5);
-  width: 17vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow-y: auto;
-}
-.history p {
-  color: white;
-  padding: 5px;
-  margin: 5px;
-}
-.history li {
-  color: white;
-  border: 2px;
-  border-style: solid;
-  list-style-type: none;
-  margin: 5px;
-  cursor: crosshair;
-}
+
 
 
 .inputForm{
@@ -194,53 +186,9 @@ textarea{
   align-content: left;
   align-items: flex-start;
 }
-.dropdown {
-  position: relative;
-  display: inline-block;
-  width: 100px;
-  color: white;
-  cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
-  align-content: left;
-  text-align: center;
-}
-.dropdown-header {
-  z-index: 1000;
-  width: 100px;
-  color: white;
-  cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
-  text-align: center;
-}
-.dropdown-options {
-  z-index: 1001;
-  width: 100px;
-  position: absolute;
-  color: white;
-  cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
-  text-align: center;
-  padding: 4px;
-  margin: 4px;
-}
-
+.dropdown ,
+.dropdown-header ,
+.dropdown-options ,
 .dropdown-option {
   color: white;
   cursor: crosshair;
@@ -268,4 +216,28 @@ textarea{
 }
 .sidenote{
   color: rgb(226, 225, 225);
+}
+
+#loading{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.733);
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+
+/*  CSS by ID */
+#length_of_ruptured_membrane{
+  display: none;
+}
+
+#translateion_language{
+  display: none;
 }

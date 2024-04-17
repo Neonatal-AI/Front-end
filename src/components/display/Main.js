@@ -104,7 +104,7 @@ userid: sessionCookie,
                 throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
             }
             console.log(response)
-            const data = await response.json()
+            const data = await response
             console.log(data)
         } catch (error) {
         console.error('There was a problem with the fetch operation:', error)
@@ -207,7 +207,7 @@ userid: sessionCookie,
                     
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
-                        documentRequest();
+                        await Promise.settled([documentRequest()]);
                         resetHooks();
                         visibilityToggle('false', "loading");
                         setView('output');

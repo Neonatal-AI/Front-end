@@ -104,7 +104,7 @@ const Main = () => {
                 throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
             }
             console.log(response)
-            let data = await response
+            let data = await response.json()
             console.log("data: ", data)
             
         } catch (error) {

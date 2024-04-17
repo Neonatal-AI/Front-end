@@ -205,13 +205,7 @@ userid: sessionCookie,
                     text="Create Prenatal Consult Docs"
                     // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                     
-                    onClick={async ()=>{
-                        visibilityToggle('true', "loading");
-                        await Promise.settled([documentRequest()]);
-                        resetHooks();
-                        visibilityToggle('false', "loading");
-                        setView('output');
-                    }}
+                    onClick={documentRequest}
                 />
                 <br></br>
                 <br></br>

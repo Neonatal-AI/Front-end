@@ -41,7 +41,7 @@ const Main = () => {
 
         if (element) {
             if (boolean === 'True') {
-                element.style.display = 'flex';
+                element.style.display = 'block';
             } else {
                 element.style.display = 'none';
             }
@@ -125,7 +125,7 @@ const Main = () => {
                 
                 <div className="inputData">
                 <h2>Output Options</h2>
-                    <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/perf_levels.asp">literacy level</a>:</label>
+                    <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/nationsreportcard/ltt/reading-descriptions.aspx">literacy level</a>:</label>
                     <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
                     <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onSelect={(e)=>setLiteracyLevel(e)}/>
                     <br/>
@@ -183,7 +183,7 @@ const Main = () => {
                         
                     <label> Length of Ruptured Membrane:  </label><br/>
                     <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onSelect={(e)=>setLengthOfRupturedMembrane(e)}/>
-                    <br/>
+                    <br/><br/>
                     </div>
 
                     <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>

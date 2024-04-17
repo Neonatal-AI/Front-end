@@ -138,8 +138,11 @@ label {
 textarea{
   color: white;
   cursor: crosshair;
-  display:flex;
-  flex-wrap: wrap;
+  display: block;
+  width: auto;
+  min-width: 50px;
+  min-height: 20px;
+  height: auto;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
   background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
@@ -150,9 +153,19 @@ textarea{
   text-align: center;
   resize: both;
 }
-
-
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px     rgba(230, 0, 0, 0.7); 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px     rgba(236, 0, 0, 0.5); 
+}
 /* class name formatting */
+
 .app{
   display: flex;
 }
@@ -164,9 +177,11 @@ textarea{
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
-  width: 83vw;
+  height: 95vh;
+  width: 95vw;
   overflow-y: auto;
+  margin-left: 5%;
+  border-radius: 15px;
 }
 
 
@@ -194,7 +209,7 @@ textarea{
   cursor: crosshair;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
+  background: linear-gradient(270deg, rgba(1, 70, 85, 0.7)0%, rgba(2, 35, 141, 0.3)100%);
   box-shadow: rgba(0,212,255,.15) 0 20px 20px,
   rgba(0,212,255,.15) 0 -8px 18px,
   rgba(0,212,255,.15) 0 2px 10px;
@@ -263,6 +278,9 @@ textarea{
 .sidenote{
   color: rgb(226, 225, 225);
 }
+/* .output-form{
+
+} */
 
 #loading{
   flex-direction: column;

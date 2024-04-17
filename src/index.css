@@ -186,9 +186,53 @@ textarea{
   align-content: left;
   align-items: flex-start;
 }
-.dropdown ,
-.dropdown-header ,
-.dropdown-options ,
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  color: white;
+  cursor: crosshair;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 20px;
+  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  align-content: left;
+  text-align: center;
+}
+.dropdown-header {
+  z-index: 1000;
+  width: 100px;
+  color: white;
+  cursor: crosshair;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 20px;
+  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  align-content: center;
+  text-align: center;
+}
+.dropdown-options {
+  z-index: 1001;
+  width: 100px;
+  position: absolute;
+  color: white;
+  cursor: crosshair;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 20px;
+  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  align-content: center;
+  text-align: center;
+  padding: 4px;
+  margin: 4px;
+}
+
 .dropdown-option {
   color: white;
   cursor: crosshair;
@@ -201,6 +245,7 @@ textarea{
   align-content: center;
   text-align: center;
 }
+
 
 .dropdown-option:hover {
   color: rgb(0, 0, 0);

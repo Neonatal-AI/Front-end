@@ -205,7 +205,13 @@ const Main = () => {
                     text="Create Prenatal Consult Docs"
                     // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                     
-                    onClick={()=>{documentRequest(); visibilityToggle('true', "loading")}}
+                    onClick={async ()=>{
+                        visibilityToggle('true', "loading");
+                        await Promise.allSettled([documentRequest()]);
+                        resetHooks();
+                        visibilityToggle('false', "loading");
+                        setView('output');
+                    }}
                 />
                 <br></br>
                 <br></br>
@@ -213,7 +219,9 @@ const Main = () => {
                 </div>
             </div>
             )}
-
+            {view=== 'output' &&
+            <div className="outputForm">
+            </div>}
             {/* this is the page loading view. no big deal, really... but important nonetheless */}
             
             <div id="loading">

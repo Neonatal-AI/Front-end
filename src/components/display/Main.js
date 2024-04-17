@@ -70,6 +70,7 @@ const Main = () => {
     const documentRequest = async () => {
         const document = {
             date: new Date(),
+userid: sessionCookie,
             inputFields: {
                 gestational_age: gestational_age,
                 birth_weight: birth_weight,
@@ -94,7 +95,8 @@ const Main = () => {
                 method: 'POST',
                 credentials: 'include', 
                 headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+            id: sessionCookie
                 },
                 body: JSON.stringify(document),
             })

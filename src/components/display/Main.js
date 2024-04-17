@@ -95,7 +95,6 @@ const Main = () => {
                 method: 'POST',
                 credentials: 'include', 
                 headers: {
-                'Content-Type': 'application/json',
                 id: sessionCookie
                 },
                 body: JSON.stringify(document),
@@ -104,8 +103,7 @@ const Main = () => {
                 throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
             }
             console.log(response)
-            const data = await response
-            console.log(data)
+            
         } catch (error) {
         console.error('There was a problem with the fetch operation:', error)
         }
@@ -205,7 +203,13 @@ const Main = () => {
                     text="Create Prenatal Consult Docs"
                     // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                     
-                    onClick={documentRequest}
+                    onClick={async ()=>{
+                        visibilityToggle('true', "loading");
+                        await Promise.settled([documentRequest()]);
+                        resetHooks();
+                        visibilityToggle('false', "loading");
+                        setView('output');
+                    }}
                 />
                 <br></br>
                 <br></br>

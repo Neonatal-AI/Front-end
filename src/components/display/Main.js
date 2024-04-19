@@ -2,6 +2,8 @@ import { useState, useEffect, React} from "react";
 import GradientButton from '../common/GradientButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import nortonLogo from './../../images/norton.png';
+import uoflHealthLogo from './../../images/uoflHealthLogo.png';
 
 import Cookies from 'js-cookie'
 
@@ -114,13 +116,14 @@ const Main = () => {
         console.error('There was a problem with the fetch operation:', error)
         }
     }
+    console.log(__dirname)
 
     
     return (
         
         <div className="app">
         <section className='main'>
-            <h2>Neonatal Assistant</h2>
+            <h2>Neonatal Assistant <img src={nortonLogo}/> <img src={uoflHealthLogo}/></h2>
             {view === 'input' && (
             <div classname= "form">
             <div className="inputForm">

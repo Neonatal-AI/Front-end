@@ -124,9 +124,10 @@ const Main = () => {
             {view === 'input' && (
             <div classname= "form">
             <div className="inputForm">
-                
-                <div className="inputData">
                 <h3>Output Options</h3>
+                <h3>Patient Information</h3>
+
+                <div className="inputData">
                     <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/nationsreportcard/ltt/reading-descriptions.aspx">literacy level</a>:</label>
                     <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
                     <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onSelect={(e)=>setLiteracyLevel(e)}/>
@@ -143,10 +144,9 @@ const Main = () => {
 
                     </div>
                 {/* input fields */}
-                <div> 
-                    <h3>Patient Information</h3>
-                        {/* used in BPD calculator and EPBO calculator */}
-                        <div className='inputData'>
+                <div>                    
+                <div className='inputData'>
+                    {/* used in BPD calculator and EPBO calculator */}
                     <label>Estimated Gestational Age (weeks):  </label>
                     <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onSelect={(e)=>setGestationalAge(e)}/>
                     <br/>
@@ -197,7 +197,7 @@ const Main = () => {
                         {/* only relevant for the GPT prompt */}
                     <label htmlFor="clinician_notes">Additional Notes:  </label>
                     <br/>
-                    <textarea  contentEditable="inherit" rows="9" cols="60" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
+                    <textarea  contentEditable="inherit" rows="9" cols="50" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
                     <br/><br/>
 
                     

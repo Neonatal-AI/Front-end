@@ -122,7 +122,7 @@ const Main = () => {
         <section className='main'>
             <h2>Neonatal Assistant</h2>
             {view === 'input' && (
-            <div>
+            <div classname= "form">
             <div className="inputForm">
                 
                 <div className="inputData">
@@ -197,21 +197,13 @@ const Main = () => {
                         {/* only relevant for the GPT prompt */}
                     <label htmlFor="clinician_notes">Additional Notes:  </label>
                     <br/>
-                    <textarea contentEditable="inherit" rows="9" cols="60" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
+                    <textarea  contentEditable="inherit" rows="9" cols="60" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
                     <br/><br/>
 
                     
                     </div>
                     </div>
                 {/* buttons for document creation */}
-
-                <div className='navBarBottom'>
-                <br/>
-                
-                <br></br>
-                <br></br>
-                
-                </div>
                 
             </div>
             <GradientButton 

@@ -156,14 +156,17 @@ textarea{
   resize: both;
 }
 ::-webkit-scrollbar {
-  width: 12px;
+  -webkit-box-shadow: inset 0 0 6px     rgba(230, 0, 0, 0.7); 
+  width: 14px;
+  border-radius: 12px;
+
 }
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px     rgba(230, 0, 0, 0.7); 
-  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px     rgba(0, 0, 0, 0.7); 
+  border-radius: 12px;
 }
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 12px;
   -webkit-box-shadow: inset 0 0 6px     rgba(236, 0, 0, 0.5); 
 }
 /* class name formatting */

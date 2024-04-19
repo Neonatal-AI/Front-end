@@ -13,24 +13,24 @@ const Main = () => {
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
     // web hooks for input fields
-    const [gestational_age, setGestationalAge] = useState(null)
-    const [birth_weight, setBirthWeight] = useState(null)
-    const [singleton, setSingleton] = useState(null)
-    const [steroids, setSteroids] = useState(null)
-    const [sex, setSex] = useState(null)
-    const [ethnicity, setEthnicity] = useState(null)
-    const [ruptured_membrane, setRupturedMembrane] = useState(null)
-    const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState(null)
-    const [pre_eclampsia, setPreEclampsia] = useState(null)
-    const [clinician_notes, setclinicianNotes] = useState(null) 
+    const [gestational_age, setGestationalAge] = useState('')
+    const [birth_weight, setBirthWeight] = useState('')
+    const [singleton, setSingleton] = useState('')
+    const [steroids, setSteroids] = useState('')
+    const [sex, setSex] = useState('')
+    const [ethnicity, setEthnicity] = useState('')
+    const [ruptured_membrane, setRupturedMembrane] = useState('')
+    const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState('')
+    const [pre_eclampsia, setPreEclampsia] = useState('')
+    const [clinician_notes, setclinicianNotes] = useState('') 
 
     // web hooks for output options
-    const [literacy_level, setLiteracyLevel] = useState(null)
-    const [translate, setTranslate] = useState(null)
-    const [language, setLanguage] = useState(null)
+    const [literacy_level, setLiteracyLevel] = useState('')
+    const [translate, setTranslate] = useState('')
+    const [language, setLanguage] = useState('')
 
     // 
-    const [prenatalConsult, setPrenatalConsult] = useState(null)
+    const [prenatalConsult, setPrenatalConsult] = useState('')
 
     const [view, setView] = useState('input') // toggle for view selection
     
@@ -53,19 +53,19 @@ const Main = () => {
     // a bunch of function expressions
 
     const resetHooks = () => {
-        setGestationalAge(null)
-        setBirthWeight(null)
-        setSingleton(null)
-        setSteroids(null)
-        setSex(null)
-        setEthnicity(null)
-        setRupturedMembrane(null)
-        setLengthOfRupturedMembrane(null)
-        setPreEclampsia(null)
-        setclinicianNotes(null)
-        setLiteracyLevel(null)
-        setTranslate(null)
-        setLanguage(null)
+        setGestationalAge('')
+        setBirthWeight('')
+        setSingleton('')
+        setSteroids('')
+        setSex('')
+        setEthnicity('')
+        setRupturedMembrane('')
+        setLengthOfRupturedMembrane('')
+        setPreEclampsia('')
+        setclinicianNotes('')
+        setLiteracyLevel('')
+        setTranslate('')
+        setLanguage('')
 
     }
 

@@ -56,13 +56,13 @@ const Main = () => {
 
     const resetHooks = () => {
         setGestationalAge('')
-        setBirthWeight(none)
+        setBirthWeight(null)
         setSingleton('')
         setSteroids('')
         setSex('')
         setEthnicity('')
         setRupturedMembrane('')
-        setLengthOfRupturedMembrane('')
+        setLengthOfRupturedMembrane(null)
         setPreEclampsia('')
         setclinicianNotes('')
         setLiteracyLevel('')

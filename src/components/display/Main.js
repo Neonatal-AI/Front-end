@@ -16,13 +16,13 @@ const Main = () => {
 
     // web hooks for input fields
     const [gestational_age, setGestationalAge] = useState('')
-    const [birth_weight, setBirthWeight] = useState('')
+    const [birth_weight, setBirthWeight] = useState(null)
     const [singleton, setSingleton] = useState('')
     const [steroids, setSteroids] = useState('')
     const [sex, setSex] = useState('')
     const [ethnicity, setEthnicity] = useState('')
     const [ruptured_membrane, setRupturedMembrane] = useState('')
-    const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState('')
+    const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState(null)
     const [pre_eclampsia, setPreEclampsia] = useState('')
     const [clinician_notes, setclinicianNotes] = useState('') 
 
@@ -56,7 +56,7 @@ const Main = () => {
 
     const resetHooks = () => {
         setGestationalAge('')
-        setBirthWeight('')
+        setBirthWeight(none)
         setSingleton('')
         setSteroids('')
         setSex('')

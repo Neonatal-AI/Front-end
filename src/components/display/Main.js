@@ -151,7 +151,7 @@ const Main = () => {
                 <div className='inputData'>
                     {/* used in BPD calculator and EPBO calculator */}
                     <label>Estimated Gestational Age (weeks):  </label>
-                    <DropdownMenu options={[22, 23, 24, 25, 26, 27, 28, 29, 30]} onSelect={(e)=>setGestationalAge(e)}/>
+                    <DropdownMenu options={[22, 23, 24, 25]} onSelect={(e)=>setGestationalAge(e)}/>
                     <br/>
                     
                         {/* used in BPD calculator and EPBO calculator */}

@@ -137,9 +137,9 @@ const Main = () => {
                     <br/>
 
                     <label htmlFor="translate">Do they need this document translated?  </label>
-                    <DropdownMenu options={["True", "False"]} onSelect={[(e)=>visibilityToggle(e, "translateion_language")]} onChange={(e)=>setTranslate(e)}/>
+                    <DropdownMenu options={["True", "False"]} onSelect={[setRupturedMembrane, (e)=>visibilityToggle(e, "translation_language")]}/>
                     <br/>
-                    <div id="translateion_language" >
+                    <div id="translation_language" >
                         <label htmlFor="translation_language">Language:  </label> 
                         <br/>
                         <DropdownMenu  options={["Spanish", "Mandarin"]} onSelect={(e)=>setLanguage(e)}/></div>

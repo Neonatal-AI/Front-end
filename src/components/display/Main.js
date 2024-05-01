@@ -15,7 +15,7 @@ const Main = () => {
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
     // web hooks for input fields
-    const [gestational_age, setGestationalAge] = useState('')
+    const [gestational_age, setGestationalAge] = useState(null)
     const [birth_weight, setBirthWeight] = useState(null)
     const [singleton, setSingleton] = useState('')
     const [steroids, setSteroids] = useState('')
@@ -107,7 +107,7 @@ const Main = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
             }
-            console.log(response)
+            // console.log(response)
             let data = await response.json()
             // console.log("data: ", data.choices[0].message.content.toString())
             return data.choices[0].message.content.toString()

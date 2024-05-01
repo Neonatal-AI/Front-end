@@ -123,7 +123,7 @@ const Main = () => {
         
         <div className="app">
         <section className='main'>
-            <h2>Neonatal Assistant <img src={nortonLogo}/> <img src={uoflHealthLogo}/></h2>
+            <h2>Neonatal AI <img src={nortonLogo}/> <img src={uoflHealthLogo}/></h2>
             {view === 'input' && (
             <div classname= "form">
             <div className="inputForm">

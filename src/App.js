@@ -8,6 +8,7 @@ import Cookies from 'js-cookie'
 import Login from './components/display/Login'
 import RegistrationForm from './components/display/AccountCreation'
 import Main from './components/display/Main'
+import TOS from './components/display/TOS'
 // import deleteCookies from './components/CookieRemoval'
 import GradientButton from './components/common/GradientButton'
 
@@ -19,11 +20,12 @@ const App = () => {
     return (
       <nav>
         {/* only want this to render on page if user does not have a valid session cookie */}
-        {!sessionCookie && <Link to="/login"><font size="+2">Privacy |</font> </Link>}
-        {!sessionCookie && <Link to="/register"><font size="+2">Terms of Service |</font> </Link>}
-
+        {!sessionCookie && <Link to="/tos"><font size="+1">Terms of Service</font></Link>}
+        {/* {!sessionCookie && <Link to="/login"><font size="+2"> Login |</font> </Link>} */}
+        {/* {!sessionCookie && <Link to="/register"><font size="+2">Register |</font> </Link>} */}
+| |
         {/* only want this to render on page if user does have a valid session cookie */}
-        {!sessionCookie && <Link to="/main"><font size="+2">Main</font></Link>}
+        {!sessionCookie && <Link to="/main"><font size="+1">Use The Tool</font></Link>}
         <br/>
         {/* {!sessionCookie && <GradientButton 
         className="logout"
@@ -47,6 +49,7 @@ const App = () => {
     <Router>
       <Navigation />
       <Routes>
+        <Route path="tos" element={<TOS/>}/>
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<RegistrationForm />} />
         {sessionCookie ? (

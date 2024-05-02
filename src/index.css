@@ -125,7 +125,7 @@ button:focus {
   rgba(0,212,255,.15) 0 2px 10px;
   align-content: center;
   text-align: center;
-  animation: bounce 2s linear;
+  animation: bounce 2s linear infinite;
 } 
 
 label {

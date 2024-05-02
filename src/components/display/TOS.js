@@ -10,10 +10,6 @@ const TOS = () => {
 
   const navigate = useNavigate()
   const [banner, setBanners] = useState(null);
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const handleUsernameChange = (event) => setUsername(event.target.value)
-  const handlePasswordChange = (event) => setPassword(event.target.value)
   const [ loginLoading, setLoginLoading ] = useState(false)
   
   // meat and potatoes of the login page
@@ -52,7 +48,6 @@ const TOS = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     loginAttempt()
-
   }
   // Get current date and time
   var now = new Date();
@@ -61,6 +56,7 @@ const TOS = () => {
   // Insert date and time into HTML
   return (
     <div>
+      <form className='TOS' onSubmit={handleSubmit}></form>
         <h2>Terms of Service Agreement</h2>
           <p><strong>Effective Date:</strong> <pre dangerouslySetInnerHTML={{__html: datetime}}></pre></p>
 
@@ -112,7 +108,11 @@ const TOS = () => {
           <p>If you have any questions about these Terms, please contact us at [Your Contact Information].</p>
 
           <p>By using the Service, you acknowledge that you have read, understood, and agree to be bound by this Agreement.</p>
-
+          <GradientButton 
+            type="submit" 
+            text="ACCEPT"
+            loading={loginLoading}
+          />
     </div>
   )
 }

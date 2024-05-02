@@ -15,30 +15,14 @@ import GradientButton from './components/common/GradientButton'
 const App = () => {
 
   let sessionCookie = Cookies.get('session')
-  const [loginLoading, setLoginLoading] = useState(false)
   const Navigation = () => {
     return (
       <nav>
         {/* only want this to render on page if user does not have a valid session cookie */}
         {!sessionCookie && <Link to="/tos"><font size="+1">Terms of Service</font></Link>}
-        {/* {!sessionCookie && <Link to="/login"><font size="+2"> Login |</font> </Link>} */}
-        {/* {!sessionCookie && <Link to="/register"><font size="+2">Register |</font> </Link>} */}
-| |
         {/* only want this to render on page if user does have a valid session cookie */}
-        {!sessionCookie && <Link to="/main"><font size="+1">Use The Tool</font></Link>}
+        {sessionCookie && <Link to="/main"><font size="+1">Use The Tool</font></Link>}
         <br/>
-        {/* {!sessionCookie && <GradientButton 
-        className="logout"
-        type="submit" 
-        text="LOGOUT"
-        loading={loginLoading}
-        onClick={ () =>{
-          setLoginLoading(true)
-          deleteCookies()
-          setLoginLoading(false)
-          window.location.reload()
-        }}
-      />} */}
 
       </nav>
     )
@@ -49,13 +33,11 @@ const App = () => {
     <Router>
       <Navigation />
       <Routes>
-        <Route path="tos" element={<TOS/>}/>
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/register" element={<RegistrationForm />} />
+        <Route path="/tos" element={<TOS/>}/>
         {sessionCookie ? (
-          <Route path="/main" element={<Login />} />
+          <Route path="/main" element={<Main />} />
         ) : (
-          <Route path="/main" element={<Main />} /> 
+          <Route path="/tos" element={<TOS />} /> 
         )}      
       </Routes>
     </Router>

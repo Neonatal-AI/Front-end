@@ -37,7 +37,7 @@ const App = () => {
         {sessionCookie ? (
           <Route path="/main" element={<Main />} />
         ) : (
-          <Route path="/main" element={<TOS />} /> 
+          <Route path="/main" element={<Main />} /> 
         )}      
       </Routes>
     </Router>

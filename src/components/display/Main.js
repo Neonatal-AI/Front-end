@@ -216,7 +216,7 @@ const Main = () => {
                     
                     onClick={async ()=>{
                         visibilityToggle('true', "loading");
-                        button.disabled = true;
+                        GradientButton.disabled = true;
                         let consult = await Promise.allSettled([documentRequest()]);
                         console.log(consult[0].value)
                         setPrenatalConsult(consult[0].value)

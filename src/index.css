@@ -102,7 +102,7 @@ p {
 button {
   display: flex;
   font-size: x-large;
-  cursor: crosshair;
+  cursor: pointer;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
   background: linear-gradient(to right, rgba(255,255,255,0), rgba(15, 125, 235, 0.425)100%);
@@ -125,6 +125,7 @@ button:hover {
   animation: gradientMove 3s linear infinite;
 } 
 button:focus {
+  cursor: wait;
   border:rgb(255, 255, 255);
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.733);

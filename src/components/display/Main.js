@@ -215,7 +215,7 @@ const Main = () => {
                     // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                     
                     onClick={async ()=>{
-                        visibilityToggle('true', "loading");
+                        loading = true;
                         GradientButton.disabled = true;
                         let consult = await Promise.allSettled([documentRequest()]);
                         console.log(consult[0].value)

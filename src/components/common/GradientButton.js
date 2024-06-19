@@ -1,12 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
 
 const GradientButton = ({
   type,
   text,
-  size,
   loading,
   onClick
 }) => {

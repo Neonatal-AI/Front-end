@@ -20,6 +20,7 @@ const App = () => {
       <nav>
         {/* TOS should always be easily accessible */}
         {<Link to="/tos"><font size="+1">Terms of Service</font></Link>}
+| |
         {/* only want this to render on page if user does have a valid session cookie */}
         {!sessionCookie && <Link to="/main"><font size="+1">Use The Tool</font></Link>}
         <br/>

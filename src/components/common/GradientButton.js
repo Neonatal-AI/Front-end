@@ -19,7 +19,7 @@ const GradientButton = ({
           <span className="ml-2">Loading...</span>
         </span>
       ) : (
-        <span>{text}</span>
+        <span style={{color: "white"}}>{text}</span>
       )}
     </button>
   );

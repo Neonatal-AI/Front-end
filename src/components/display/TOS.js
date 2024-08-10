@@ -18,8 +18,8 @@ const TOS = () => {
     const options = {
       method: "POST",
       body: JSON.stringify({
-          username: username,
-          password: password,
+          // username: username,
+          // password: password,
       }),
       headers:{
         "Content-Type": "application/json"
@@ -55,7 +55,7 @@ const TOS = () => {
 
   // Insert date and time into HTML
   return (
-    <div>
+    <section className='main'>
       <form className='TOS' onSubmit={handleSubmit}></form>
         <h2>Terms of Service Agreement</h2>
           <p><strong>Effective Date:</strong> <pre dangerouslySetInnerHTML={{__html: datetime}}></pre></p>
@@ -71,7 +71,7 @@ const TOS = () => {
           <ul>
           <li>Use the Service only for lawful purposes in compliance with all applicable laws and regulations.</li>
           <li>Ensure data input into the Service is accurate and up-to-date.</li>
-          <li>Review and validate the Service’s outputs before use or reliance for any clinical decisions or patient care activities.</li>
+          <li>Review and validate the Service's outputs before use or reliance for any clinical decisions or patient care activities.</li>
           <li>Use the Service as a supplementary tool and not as a sole decision-making source in patient care.</li>
           </ul>
 
@@ -108,12 +108,12 @@ const TOS = () => {
           <p>If you have any questions about these Terms, please contact us at [Your Contact Information].</p>
 
           <p>By using the Service, you acknowledge that you have read, understood, and agree to be bound by this Agreement.</p>
-          <GradientButton 
+          <GradientButton
             type="submit" 
             text="ACCEPT"
             loading={loginLoading}
           />
-    </div>
+    </section>
   )
 }
 export default TOS

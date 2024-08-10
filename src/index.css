@@ -4,8 +4,9 @@
 /* generic text */
 
 * {
-  color: white;
-  font-family: 'Roboto Mono', monospace;
+  color: black;
+  font-family: 'Open Sans', sans-serif, monospace;
+  font-size: large;
 }
 
 /* animation keyframe */
@@ -57,10 +58,33 @@
     transform: translateY(-2px);
   }
 }
-
+:link{
+  color:#17467d;
+  text-decoration: none;
+  font-style: oblique;
+}
+:link:hover{
+  color:#437C97;
+  text-decoration: underline;
+}
+:link:active{
+  border:#17467d 1px solid;
+}
+:link:visited{
+  color:#437C97;
+}
+.nav{
+  color: white;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-left: 5px;
+  padding-left: 5px;
+}
 /* formatting for generic HTML tag types */
 body {
-  color: white;
+  color: black;
   margin: 0;
   padding: 0;
   background-image: url("./images/transluscentgradient2.png");
@@ -71,7 +95,7 @@ body {
   animation: gradientChange 60s ease-out infinite;
   }
 h1 {
-  color: white;
+  color: #437C97;
   align-content: center;
   font-family: 'Roboto Mono', Roboto, Oxygen, Ubuntu, monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 55px;
@@ -80,10 +104,19 @@ h1 {
   margin: 5px;
 }
 h2 {
-  color: white;
+  color: #17467D;
   align-content: center;
   font-family: 'Roboto Mono', Roboto, Oxygen, Ubuntu, monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 35px;
+  font-size: calc(1.35rem + 0.525vw);
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+}
+h3 {
+  color: #17467D;
+  align-content: center;
+  font-family: 'Roboto Mono', Roboto, Oxygen, Ubuntu, monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: calc(1.2625rem + 0.15vw);
   font-weight: 500;
   padding: 5px;
   margin: 5px;
@@ -92,27 +125,28 @@ a{
   color:rgb(0, 0, 0)
 }
 p {
-  color: white;
+  color: black;
+  margin: 5px;
+  border: 5px;
+  padding: 5px;
   border-radius: 20px;
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(8, 28, 32, 0.15) 0 2px 10px;
-  background:  rgba(64, 64, 64, 0.95);
+  box-shadow: rgba(0, 0, 0, 0.623) 1px 2px 2px 3px;
 }
 button {
   display: flex;
   font-size: x-large;
+  color: #eeeeee;
   cursor: pointer;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(15, 125, 235, 0.425)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
+  background: #17467d;
   align-items: center;
   justify-content: center;
   text-align: center;
   transition: 3s ease;
+  margin: 5px;
+  border: 5px;
+  padding: 5px;
 } 
 button:hover {
   background: linear-gradient(to right, rgba(255,255,255,0), rgba(.4, 27.8, 72.2, 0.8)100%);
@@ -139,30 +173,24 @@ button:focus {
 } 
 
 label {
-  color: white;
+  color: black;
   border-radius: 20px;
-  background: linear-gradient(270deg, rgba(0,212,255,.15)0%, rgb(0, 150, 255, .75)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
 }
 
 textarea{
-  color: white;
+  color: black;
   cursor: crosshair;
   display: block;
   width: auto;
   min-width: 50px;
-  min-height: 20px;
+  min-height: 25px;
+  max-width: fit-content;
   height: auto;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  #00d4ff26 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
+  border:2px solid;
+  border-radius: 1px;
+  background: white;
   align-content: normal;
-  text-align: center;
+  text-align: left;
   resize: both;
 }
 ::-webkit-scrollbar {
@@ -185,7 +213,7 @@ textarea{
   display: flex;
 }
 .main {
-  background-image:  url("./images/box.png");
+  background: #fff;
   background-size: cover;
   display: flex;
   vertical-align: 13%;
@@ -215,21 +243,18 @@ textarea{
   text-align: left;
   align-items: start;
   justify-content: top;
+  margin: 0.5rem;
 }
 .dropdown {
   position: relative;
   display: inline-block;
-  width: 100px;
-  color: white;
+  width: auto;
+  color: black;
   cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
-  border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 70, 85, 0.7)0%, rgba(2, 35, 141, 0.3)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
   align-content: left;
   text-align: center;
+  padding: 4px;
+  margin: 4px;
 }
 .dropdown-header {
   z-index: 1000;
@@ -238,12 +263,11 @@ textarea{
   cursor: crosshair;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
+  background: #17467d;
   align-content: center;
   text-align: center;
+  margin: 4px;
+  padding: 4px;
 }
 .dropdown-options {
   z-index: 1001;
@@ -254,9 +278,6 @@ textarea{
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
   background: black;
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
   align-content: center;
   text-align: center;
   padding: 4px;
@@ -291,7 +312,13 @@ textarea{
   text-align: center;
 }
 .sidenote{
-  color: rgb(226, 225, 225);
+  color: black;
+  background-color: #eeeeee;
+  margin: 2px;
+  padding-right: 5px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  width: fit-content;
 }
 /* .output-form{
 

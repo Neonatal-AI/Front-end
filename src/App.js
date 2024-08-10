@@ -10,22 +10,21 @@ import RegistrationForm from './components/display/AccountCreation'
 import Main from './components/display/Main'
 import TOS from './components/display/TOS'
 // import deleteCookies from './components/CookieRemoval'
-import GradientButton from './components/common/GradientButton'
 
 const App = () => {
 
   let sessionCookie = Cookies.get('session')
   const Navigation = () => {
     return (
-      <nav>
+      <nav >
         {/* TOS should always be easily accessible */}
-        {<Link to="/tos"><font size="+1">Terms of Service</font></Link>}
-<br/>
+        {<Link className='nav' to="/tos">Terms of Service</Link>}
+        <span style={{color: "white"}}>    |    </span>
         {/* only want this to render on page if user does have a valid session cookie */}
-        {!sessionCookie && <Link to="/main"><font size="+1">Use The Tool</font></Link>}
+        {!sessionCookie && <Link className='nav' to="/main">Use The Tool</Link>}
         <br/>
-
       </nav>
+      
     )
   }
 
@@ -33,7 +32,7 @@ const App = () => {
     // <UserProvider>
     <Router>
       <Navigation />
-      <Routes>
+      <Routes className={'nav'}>
         <Route path="/tos" element={<TOS/>}/>
         {sessionCookie ? (
           <Route path="/main" element={<Main />} />

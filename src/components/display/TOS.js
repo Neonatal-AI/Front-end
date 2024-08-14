@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-import GradientButton from '../common/GradientButton'
+import GradientButton from './common/GradientButton'
 
 
 const TOS = () => { 
@@ -55,7 +55,9 @@ const TOS = () => {
 
   // Insert date and time into HTML
   return (
+    <div className='app'>
     <section className='main'>
+      
       <form className='TOS' onSubmit={handleSubmit}></form>
         <h2>Terms of Service Agreement</h2>
           <p><strong>Effective Date:</strong> <pre dangerouslySetInnerHTML={{__html: datetime}}></pre></p>
@@ -67,21 +69,25 @@ const TOS = () => {
           <p>The Service utilizes generative artificial intelligence (AI) technologies to assist healthcare professionals in patient advocacy and documentation within neonatal healthcare settings. The Service offers tools to generate, summarize, and analyze patient data and information to support healthcare delivery.</p>
 
           <h3>3. User Responsibilities</h3>
-          <p>As a user, you agree to:</p>
+          <p>As a user, you agree to:
           <ul>
           <li>Use the Service only for lawful purposes in compliance with all applicable laws and regulations.</li>
           <li>Ensure data input into the Service is accurate and up-to-date.</li>
           <li>Review and validate the Service's outputs before use or reliance for any clinical decisions or patient care activities.</li>
           <li>Use the Service as a supplementary tool and not as a sole decision-making source in patient care.</li>
           </ul>
+          </p>
+          
 
           <h3>4. Limitations of AI Generated Content</h3>
-          <p>You acknowledge and agree that:</p>
+          <p>You acknowledge and agree that:
           <ul>
           <li>The AI in the Service functions based on algorithms and data inputs that may not encompass all possible neonatal care nuances and specificities.</li>
           <li>The Service may generate outputs that could contain inaccuracies or "hallucinations" (i.e., generated information that is not based on factual data).</li>
           <li>Reliance on any information provided by the Service is strictly at your own risk.</li>
           </ul>
+          </p>
+          
 
           <h3>5. Intellectual Property</h3>
           <p>All intellectual property rights in the Service, including but not limited to software, algorithms, interfaces, text, and graphics, are owned by or licensed to us and are protected under copyright and intellectual property laws. You are granted a non-exclusive, non-transferable, limited license to access and use the Service for your professional use subject to these terms.</p>
@@ -114,6 +120,7 @@ const TOS = () => {
             loading={loginLoading}
           />
     </section>
+    </div>
   )
 }
 export default TOS

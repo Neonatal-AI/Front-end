@@ -1,255 +1,46 @@
-import { useState, useEffect, React} from "react";
-import GradientButton from '../common/GradientButton'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import nortonLogo from './../../images/norton.png';
-import uoflHealthLogo from './../../images/uoflHealthLogo.png';
-
+import { useState, React} from "react"
 import Cookies from 'js-cookie'
 
-import DropdownMenu from './DropdownMenu';
+
+// internal image imports
+import nortonLogo from './../../images/norton.png'
+import uoflHealthLogo from './../../images/uoflHealthLogo.png'
+
+// internal react components
+import PrenatalConsult from "./prenatalConsult/PrenatalConsult"
+import Handout from "./handout/Handout"
 
 const Main = () => {
-        // variables and hooks
+
     const sessionCookie = Cookies.get('session')
-    const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
-    // web hooks for input fields
-    const [gestational_age, setGestationalAge] = useState(null)
-    const [birth_weight, setBirthWeight] = useState(null)
-    const [singleton, setSingleton] = useState('')
-    const [steroids, setSteroids] = useState('')
-    const [sex, setSex] = useState('')
-    const [ethnicity, setEthnicity] = useState('')
-    const [ruptured_membrane, setRupturedMembrane] = useState('')
-    const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState(null)
-    const [pre_eclampsia, setPreEclampsia] = useState('')
-    const [clinician_notes, setclinicianNotes] = useState('') 
+    // view setting hooks and change events
+    const [ view, setView] = useState('')
 
-    // web hooks for output options
-    const [literacy_level, setLiteracyLevel] = useState('')
-    const [translate, setTranslate] = useState('')
-    const [language, setLanguage] = useState('')
-
-    // 
-    const [prenatalConsult, setPrenatalConsult] = useState('')
-
-    const [view, setView] = useState('input') // toggle for view selection
-    
-    // toggle visibility of input areas
-    const visibilityToggle = (boolean, elementId) => {
-        console.log(`bool ${boolean}\nelemID: ${elementId}`)
-        const element = document.getElementById(elementId);
-
-        if (element) {
-            if (boolean === 'True') {
-                element.style.display = 'block';
-            } else {
-                element.style.display = 'none';
-            }
-        } else {
-            console.warn(`Element with id '${elementId}' not found.`);
-        }
-    };
-
-    // a bunch of function expressions
-
-    const resetHooks = () => {
-        setGestationalAge('')
-        setBirthWeight(null)
-        setSingleton('')
-        setSteroids('')
-        setSex('')
-        setEthnicity('')
-        setRupturedMembrane('')
-        setLengthOfRupturedMembrane(null)
-        setPreEclampsia('')
-        setclinicianNotes('')
-        setLiteracyLevel('')
-        setTranslate('')
-        setLanguage('')
-
-    }
-
-    const documentRequest = async () => {
-        const document = {
-            date: new Date(),
-            userid: sessionCookie,
-            inputFields: {
-                gestational_age: gestational_age,
-                birth_weight: birth_weight,
-                singleton: singleton,
-                steroids: steroids,
-                sex: sex,
-                ethnicity: ethnicity,
-                ruptured_membrane: ruptured_membrane,
-                length_of_ruptured_membrane:length_of_ruptured_membrane,
-                pre_eclampsia:pre_eclampsia,
-                clinician_notes:clinician_notes
-            },
-            outputOptions: {
-                literacy_level: literacy_level,
-                translate: translate,
-                language: language
-            }
-        }
-        try {
-            console.log(document)
-            const response = await fetch(`${API_URL}/createDocs`, {
-                method: 'POST',
-                credentials: 'include', 
-                headers: {
-                    'Content-Type': 'application/json',
-                    id: sessionCookie
-                },
-                body: JSON.stringify(document),
-            })
-            if (!response.ok) {
-                throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
-            }
-            // console.log(response)
-            let data = await response.json()
-            // console.log("data: ", data.choices[0].message.content.toString())
-            return data.choices[0].message.content.toString()
-            
-        } catch (error) {
-        console.error('There was a problem with the fetch operation:', error)
-        }
-    }
-    console.log(__dirname)
-
-    
     return (
         
         <div className="app">
         <section className='main'>
-            <h2>Neonatal AI <img src={nortonLogo}/> <img src={uoflHealthLogo}/></h2>
-            {view === 'input' && (
-            <div classname= "form">
-            <div className="inputForm">
-                <h3>Output Options</h3>
-                <h3>Patient Information</h3>
-
-                <div className="inputData">
-                    <label htmlFor="literacy_level">Parental <a href="https://nces.ed.gov/nationsreportcard/ltt/reading-descriptions.aspx">literacy level</a>:</label>
-                    <span className="sidenote">Literacy levels defined by National Center for Educational Statistics. See link for details.</span>
-                    <DropdownMenu options={["Below Basic", "Basic", "Intermediate", "Proficient"]} onSelect={(e)=>setLiteracyLevel(e)}/>
-                    <br/>
-
-                    <label htmlFor="translate">Do they need this document translated?  </label>
-                    <DropdownMenu options={["True", "False"]} onSelect={ (e)=>visibilityToggle(e)}/>
-                    <br/>
-                    <div id="translation_language" >
-                        <label htmlFor="translation_language">Language:  </label> 
-                        <br/>
-                        <DropdownMenu  options={["Spanish", "Mandarin"]} onSelect={(e)=>setLanguage(e)}/></div>
-                    <br/>
-
-                    </div>
-                {/* input fields */}
-                <div>                    
-                <div className='inputData'>
-                    {/* used in BPD calculator and EPBO calculator */}
-                    <label>Estimated Gestational Age (weeks):  </label>
-                    <DropdownMenu options={[22, 23, 24, 25]} onSelect={(e)=>setGestationalAge(e)}/>
-                    <br/>
-                    
-                        {/* used in BPD calculator and EPBO calculator */}
-                    <label>Estimated birth weight (grams):  </label>
-                    <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
-                    <textarea rows="2" cols="6" id="birth_weight" name="birth_weight" onChange={(e)=>setBirthWeight(e.target.value)}></textarea> 
-                    <br/>
-
-                        {/* used in BPD calculator only */}
-                    <label>Singleton birth: </label>
-                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSingleton(e)}/>
-                    <br/>
-
-                        {/* used in BPD calculator only */}
-                    <label>Antenatal Steroids: </label>
-                                    <span className="sidenote">ANS should only be entered for postnatal day 1.</span>
-                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setSteroids(e)}/>
-                    <br/>
-
-                        {/* used in BPD calculator and EPBO calculator */}
-                    <label>Infant sex: </label>
-                    <DropdownMenu options={['Male', 'Female']} onSelect={(e)=>setSex(e)}/>
-                    <br/>
-
-                    {/* used in BPD calculator only */}
-                    <label htmlFor="ethnicity">Race / Ethnicity:  </label>
-                    <DropdownMenu options={['White', 'Black', 'Hispanic']} onSelect={(e)=>setEthnicity(e)}/>
-                    <br/>
-
-                    <label htmlFor="ruptured_membrane"> Ruptured Membrane:  </label>
-                    <DropdownMenu options={['True', 'False']} onSelect={[setRupturedMembrane, (e)=>visibilityToggle(e, "length_of_ruptured_membrane")]}/>
-                    <br/>
-
-                    <div id="length_of_ruptured_membrane">
-                        
-                    <label> Length of Ruptured Membrane:  </label><br/>
-                    <DropdownMenu options={[1, 2, 3, 4, 5, 6, 7, 8]} onSelect={(e)=>setLengthOfRupturedMembrane(e)}/>
-                    <br/><br/>
-                    </div>
-
-                    <label htmlFor="pre_eclampsia"> Pre-eclampsia:  </label>
-                    <DropdownMenu options={['True', 'False']} onSelect={(e)=>setPreEclampsia(e)}/>
-                    <br/>
-                    
-                    
-                        {/* only relevant for the GPT prompt */}
-                    <label htmlFor="clinician_notes">Additional Notes:  </label>
-                    <br/>
-                    <textarea  contentEditable="inherit" rows="9" cols="50" id="clinician_notes" name="clinician_notes" onChange={(e)=>setclinicianNotes(e.target.value)}></textarea> 
-                    <br/><br/>
-
-                    
-                    </div>
-                    </div>
-                {/* buttons for document creation */}
-                
-            </div>
-            <GradientButton 
-                    type="submit" 
-                    text="Create Prenatal Consult Docs"
-                    // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
-                    
-                    onClick={async ()=>{
-                        GradientButton.loading = true;
-                        GradientButton.disabled = true;
-                        let consult = await Promise.allSettled([documentRequest()]);
-                        console.log(consult[0].value)
-                        setPrenatalConsult(consult[0].value)
-                        resetHooks();
-                        visibilityToggle('false', "loading");
-                        setView('output');
-                    }}
-                />
-            </div>
+            <h2>Neonatal AI <img src={nortonLogo} alt="NortonLogo"/> <img src={uoflHealthLogo} alt="UofLHealthLogo"/></h2>
             
+            {view === '' && (
+            <h2>Get started by selecting an option!</h2>
             )}
-            {view=== 'output' &&
-            <div className="outputForm">
-                <button onClick={() => setView('input')}>submit another form</button> 
-                <br></br>
-                <p dangerouslySetInnerHTML={{__html: prenatalConsult}} />
-            </div>}
-            {/* this is the page loading view. no big deal, really... but important nonetheless */}
-            
-            <div id="loading">
-                <span className="flex items-center">
-                <FontAwesomeIcon icon={faCircleNotch} spin />
-                <div>Loading...</div>
-                </span>
+            <div className="selectionArea">
+                <button onClick={() => setView("PrenatalConsult")}> Create Prenatal Consult </button>
+                <button onClick={()=>setView("Handout")}> Create Handout </button>
             </div>
             
-
-            {/*  */}
-            
+            {view === 'PrenatalConsult' && (
+            <PrenatalConsult sessionCookie={sessionCookie}/>
+            )}
+            {view === 'Handout' && (
+            <Handout sessionCookie={sessionCookie}/>
+            )}
         </section>
         </div>
     );
     
 }
 
-export default Main;
+export default Main

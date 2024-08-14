@@ -151,25 +151,13 @@ button {
 button:hover {
   background: linear-gradient(to right, rgba(255,255,255,0), rgba(.4, 27.8, 72.2, 0.8)100%);
   background-size: 200% 100%;
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
-  text-align: center;
   animation: gradientMove 3s linear infinite;
 } 
 button:focus {
-  cursor: wait;
-  border:rgb(255, 255, 255);
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.733);
-  background-size: 200% 100%;
   box-shadow: rgba(0,212,255,.15) 0 20px 20px,
   rgba(0,212,255,.15) 0 -8px 18px,
   rgba(0,212,255,.15) 0 2px 10px;
-  align-content: center;
-  text-align: center;
-  animation: bounce 2s linear infinite;
+  animation: bounce 2s linear 200ms 1;
 } 
 
 label {
@@ -186,7 +174,7 @@ textarea{
   min-height: 25px;
   max-width: fit-content;
   height: auto;
-  border:2px solid;
+  border: 1px solid;
   border-radius: 1px;
   background: white;
   align-content: normal;
@@ -208,7 +196,6 @@ textarea{
   -webkit-box-shadow: inset 0 0 6px     rgba(236, 0, 0, 0.5); 
 }
 /* class name formatting */
-
 .app{
   display: flex;
 }
@@ -220,16 +207,27 @@ textarea{
   flex-direction: column;
   align-items: center;
   justify-content: top;
-  min-height: 94vh;
-  max-height: 94vh;
-  width: 98vw;
+  height: auto;
+  max-height: 96vh;
+  width: 100vw;
   overflow-y: auto;
-  margin-left: 4%;
+  margin-left: 1%;
+  margin-right: 1%;
   border-radius: 12px;
 }
-.inputForm{
+.selectionArea{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.PrenatalConsult{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+.Handout{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+.inputForm{
   min-height: 65vh;
   padding-top: 5px;
 }
@@ -267,7 +265,8 @@ textarea{
   align-content: center;
   text-align: center;
   margin: 4px;
-  padding: 4px;
+  margin-left: 0;
+  padding: 7px;
 }
 .dropdown-options {
   z-index: 1001;
@@ -275,13 +274,14 @@ textarea{
   position: absolute;
   color: white;
   cursor: crosshair;
-  border:rgba(64, 64, 64, 0.5);
+  margin: 4px;
+  border:rgba(64, 64, 64, 0.5) solid;
   border-radius: 20px;
-  background: black;
+  padding: 2px;
+  background: white;
   align-content: center;
   text-align: center;
-  padding: 4px;
-  margin: 4px;
+  width: max-content;
 }
 
 .dropdown-option {
@@ -289,22 +289,20 @@ textarea{
   cursor: crosshair;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 20px;
-  background: linear-gradient(270deg, rgba(1, 72, 87, 0.727)0%, rgba(2, 35, 141, 0.349)100%);
-  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
-  rgba(0,212,255,.15) 0 -8px 18px,
-  rgba(0,212,255,.15) 0 2px 10px;
+  background: #17467d;
   align-content: center;
   text-align: center;
-  margin: 4px;
+  width: max-content;
+  margin: 3px;
+  padding: 7px;
 }
 
 
 .dropdown-option:hover {
-  color: rgb(0, 0, 0);
   cursor: crosshair;
   border:rgba(64, 64, 64, 0.5);
   border-radius: 30px;
-  background: linear-gradient(270deg, rgba(255, 255, 255, 0.727)0%, rgba(219, 227, 255, 0.349)100%);
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.727)0%, #17467d 90%);
   box-shadow: rgba(0,212,255,.15) 0 20px 20px,
   rgba(0,212,255,.15) 0 -8px 18px,
   rgba(0,212,255,.15) 0 2px 10px;
@@ -331,11 +329,11 @@ textarea{
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.733);
-  z-index: 10000;
+  z-index: 1000000;
   position: fixed;
   top: 0;
   left: 0;
-  display: none;
+  /* display: none; */
 }
 
 
@@ -344,7 +342,7 @@ textarea{
   display: none;
 }
 
-#translateion_language{
+#translation_language{
   display: none;
 }
 

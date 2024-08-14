@@ -10,7 +10,10 @@ const GetHandout = async (
     ruptured_membrane,
     length_of_ruptured_membrane,
     pre_eclampsia,
-    clinician_notes
+    clinician_notes,
+    literacy_level,
+    translate,
+    language
 ) => {
     const document = {
         date: new Date(),

@@ -29,6 +29,11 @@ const GetHandout = async (
             length_of_ruptured_membrane:length_of_ruptured_membrane,
             pre_eclampsia:pre_eclampsia,
             clinician_notes:clinician_notes
+        },
+        outputOptions:{
+            literacy_level:literacy_level,
+            translate:translate,
+            language:language
         }
     }
     try {

@@ -122,6 +122,7 @@ const Handout = (sessionCookie) => {
                         // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                         
                         onClick={async ()=>{
+                            setView("loading")
                             GradientButton.loading = true;
                             GradientButton.disabled = true;
                             let consult = await Promise.allSettled(
@@ -144,11 +145,10 @@ const Handout = (sessionCookie) => {
                                     )
                                 ]
                             )
-                            
                             console.log(consult[0].value)
                             setPrenatalConsult(consult[0].value)
                             setView('output')
-                            setView("loading")
+                            
                         }}
                     />
             </div>}

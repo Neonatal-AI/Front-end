@@ -5,6 +5,7 @@ import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
 import { visibilityToggle } from '../functions/util'
 import GetHandout from './GetHandout'
+import Loading from '../common/Loading'
 
 const Handout = (sessionCookie) => {
     // variables and hooks
@@ -143,13 +144,18 @@ const Handout = (sessionCookie) => {
                                     )
                                 ]
                             )
+                            
                             console.log(consult[0].value)
                             setPrenatalConsult(consult[0].value)
                             setView('output')
-                            visibilityToggle('false', "loading");
+                            setView("loading")
                         }}
                     />
             </div>}
+
+            {view === 'loading' && (
+                                <Loading/>
+                                )}
 
             {view=== 'output' &&(
                 <div className="outputForm">

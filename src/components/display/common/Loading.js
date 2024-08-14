@@ -8,9 +8,9 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 const Loading = () => {
     return(            
         <div id="loading">
-            <span className="flex items-center">
+            <span style={{alignItems:"center", justifyItems:"center"}}>
             <FontAwesomeIcon icon={faCircleNotch} spin />
-            <div>Loading...</div>
+            <div style={{color:"white"}}>Loading...</div>
             </span>
         </div>
         )

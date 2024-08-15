@@ -7,7 +7,7 @@ import { visibilityToggle } from '../functions/util'
 import GetHandout from './GetHandout'
 import Loading from '../common/Loading'
 
-const Handout = (sessionCookie, view, setView) => {
+const Handout = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
 
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
@@ -121,7 +121,7 @@ const Handout = (sessionCookie, view, setView) => {
                         // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                         
                         onClick={async ()=>{
-                            setView("loading")
+                            setFormView("loading")
                             GradientButton.loading = true;
                             GradientButton.disabled = true;
                             let consult = await Promise.allSettled(
@@ -146,7 +146,7 @@ const Handout = (sessionCookie, view, setView) => {
                             )
                             console.log(consult[0].value)
                             setPrenatalConsult(consult[0].value)
-                            setView('output')
+                            setFormView('output')
                             
                         }}
                     />
@@ -158,9 +158,10 @@ const Handout = (sessionCookie, view, setView) => {
 
             {view=== 'output' &&(
                 <div className="outputForm">
-                    <button onClick={() => setView('input')}>submit another form</button> 
-                    <br></br>
+                    <br/>
                     <p dangerouslySetInnerHTML={{__html: prenatalConsult}} />
+                    <br/>
+                    <button onClick={() => setFormView('input')}>submit another form</button> 
                 </div>)}
             
         </div>

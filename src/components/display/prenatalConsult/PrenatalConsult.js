@@ -1,5 +1,4 @@
 import {React, useState} from 'react'
-import Cookies from 'js-cookie'
 
 // internal react components
 import GradientButton from '../common/GradientButton'
@@ -7,9 +6,8 @@ import DropdownMenu from '../common/DropdownMenu'
 import { visibilityToggle } from '../functions/util'
 import GetPrenatalConsult from './GetPrenatalConsult'
 
-const PrenatalConsult = () => {
+const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
-    const sessionCookie = Cookies.get('session')
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
     // web hooks for input fields
@@ -27,7 +25,6 @@ const PrenatalConsult = () => {
     // web hooks for output options
     const [prenatalConsult, setPrenatalConsult] = useState(null)
 
-    const [view, setView] = useState('input')
     return(
         <div className='inputForm'>
 
@@ -121,7 +118,7 @@ const PrenatalConsult = () => {
                             )]);
                             console.log(consult[0].value)
                             setPrenatalConsult(consult[0].value)
-                            setView('output')
+                            setFormView('output')
                             visibilityToggle('false', "loading");
                         }}
                     />
@@ -129,9 +126,10 @@ const PrenatalConsult = () => {
 
             {view=== 'output' &&(
                 <div className="outputForm">
-                    <button onClick={() => setView('input')}>submit another form</button> 
-                    <br></br>
+                    <br/>
                     <p dangerouslySetInnerHTML={{__html: prenatalConsult}} />
+                    <br/>
+                    <button onClick={() => setFormView('input')}>submit another form</button> 
                 </div>)}
         </div>
     )

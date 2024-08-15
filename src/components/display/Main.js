@@ -35,7 +35,7 @@ const Main = () => {
             <PrenatalConsult sessionCookie={sessionCookie} view={formView} setView={setFormView}/>
             )}
             {view === 'Handout' && (
-            <Handout sessionCookie={sessionCookie}/>
+            <Handout sessionCookie={sessionCookie} view={formView} setView={setFormView}/>
             )}
         </section>
         </div>

@@ -16,7 +16,7 @@ const Main = () => {
 
     // view setting hooks and change events
     const [ view, setView] = useState('')
-
+    const [ formView, setFormView] = useState('input')
     return (
         
         <div className="app">
@@ -32,7 +32,7 @@ const Main = () => {
             </div>
             
             {view === 'PrenatalConsult' && (
-            <PrenatalConsult sessionCookie={sessionCookie}/>
+            <PrenatalConsult sessionCookie={sessionCookie} view={formView} setView={setFormView}/>
             )}
             {view === 'Handout' && (
             <Handout sessionCookie={sessionCookie}/>

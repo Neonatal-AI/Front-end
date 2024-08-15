@@ -7,7 +7,7 @@ import { visibilityToggle } from '../functions/util'
 import GetHandout from './GetHandout'
 import Loading from '../common/Loading'
 
-const Handout = (sessionCookie) => {
+const Handout = (sessionCookie, view, setView) => {
     // variables and hooks
 
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
@@ -30,7 +30,6 @@ const Handout = (sessionCookie) => {
     
     const [prenatalConsult, setPrenatalConsult] = useState(null)
 
-    const [view, setView] = useState('input')
     return(
         <div className='inputForm'>
 

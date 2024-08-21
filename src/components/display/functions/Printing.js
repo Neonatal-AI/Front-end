@@ -1,9 +1,8 @@
 import * as React from "react";
-import ReactToPrint from "react-to-print";
+import { useReactToPrint } from "react-to-print";
 
-import { ComponentToPrint } from "../ComponentToPrint";
-
-export const FunctionalComponent = () => {
+import Handout from "../handout/Handout";
+export const Printing = () => {
   const componentRef = React.useRef(null);
 
   const onBeforeGetContentResolve = React.useRef(null);
@@ -12,15 +11,15 @@ export const FunctionalComponent = () => {
   const [text, setText] = React.useState("old boring text");
 
   const handleAfterPrint = React.useCallback(() => {
-    console.log("`onAfterPrint` called");
+    console.log("`onAfterPrint` called"); // tslint:disable-line no-console
   }, []);
 
   const handleBeforePrint = React.useCallback(() => {
-    console.log("`onBeforePrint` called");
+    console.log("`onBeforePrint` called"); // tslint:disable-line no-console
   }, []);
 
   const handleOnBeforeGetContent = React.useCallback(() => {
-    console.log("`onBeforeGetContent` called");
+    console.log("`onBeforeGetContent` called"); // tslint:disable-line no-console
     setLoading(true);
     setText("Loading new text...");
 
@@ -35,6 +34,19 @@ export const FunctionalComponent = () => {
     });
   }, [setLoading, setText]);
 
+  const reactToPrintContent = React.useCallback(() => {
+    return componentRef.current;
+  }, [componentRef.current]);
+
+  const handlePrint = useReactToPrint({
+    content: reactToPrintContent,
+    documentTitle: "AwesomeFileName",
+    onBeforeGetContent: handleOnBeforeGetContent,
+    onBeforePrint: handleBeforePrint,
+    onAfterPrint: handleAfterPrint,
+    removeAfterPrint: true
+  });
+
   React.useEffect(() => {
     if (
       text === "New, Updated Text!" &&
@@ -44,34 +56,12 @@ export const FunctionalComponent = () => {
     }
   }, [onBeforeGetContentResolve.current, text]);
 
-  const reactToPrintContent = React.useCallback(() => {
-    return componentRef.current;
-  }, [componentRef.current]);
-
-  const reactToPrintTrigger = React.useCallback(() => {
-    // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-    // to the root node of the returned component as it will be overwritten.
-
-    // Bad: the `onClick` here will be overwritten by `react-to-print`
-    // return <button onClick={() => alert('This will not work')}>Print this out!</button>;
-
-    // Good
-    return <button>Print using a Functional Component</button>;
-  }, []);
-
   return (
     <div>
-      <ReactToPrint
-        content={reactToPrintContent}
-        documentTitle="AwesomeFileName"
-        onAfterPrint={handleAfterPrint}
-        onBeforeGetContent={handleOnBeforeGetContent}
-        onBeforePrint={handleBeforePrint}
-        removeAfterPrint
-        trigger={reactToPrintTrigger}
-      />
       {loading && <p className="indicator">onBeforeGetContent: Loading...</p>}
-      <ComponentToPrint ref={componentRef} text={text} />
+      <button onClick={handlePrint}>
+        Print using a Functional Component with the useReactToPrint hook
+      </button>
     </div>
   );
 };

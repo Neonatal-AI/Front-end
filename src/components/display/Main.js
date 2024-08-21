@@ -1,7 +1,6 @@
 import { useState, React} from "react"
 import Cookies from 'js-cookie'
 
-
 // internal image imports
 import nortonLogo from './../../images/norton.png'
 import uoflHealthLogo from './../../images/uoflHealthLogo.png'
@@ -35,13 +34,14 @@ const Main = () => {
             {view === 'PrenatalConsult' && (
             <PrenatalConsult sessionCookie={sessionCookie} view={conaultView} setFormView={setConsultView}/>
             )}
+
             {view === 'Handout' && (
             <Handout sessionCookie={sessionCookie} view={handoutView} setFormView={setHandoutView}/>
             )}
+
         </section>
         </div>
     );
-    
 }
 
 export default Main

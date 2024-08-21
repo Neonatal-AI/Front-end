@@ -1,4 +1,5 @@
-import {React, useState} from 'react'
+import {React, useState, useRef} from 'react'
+
 
 // internal react components
 import GradientButton from '../common/GradientButton'
@@ -6,6 +7,17 @@ import DropdownMenu from '../common/DropdownMenu'
 import { visibilityToggle } from '../functions/util'
 import GetHandout from './GetHandout'
 import Loading from '../common/Loading'
+
+// tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
+const SetContentEditable = (parentRef) => {
+   
+      if (parentRef.current) {
+        const children = parentRef.current.querySelectorAll('*');
+        children.forEach(child => {
+          child.setAttribute('contentEditable', 'true');
+        });
+      }
+    };
 
 const Handout = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
@@ -29,6 +41,11 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
     const [language, setLanguage] = useState('')
     
     const [prenatalConsult, setPrenatalConsult] = useState(null)
+
+    const parentRef = useRef(null);
+    const makeEditable = () => {
+        SetContentEditable(parentRef);
+      };
 
     return(
         <div className='inputForm'>
@@ -143,12 +160,15 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                                 )}
 
             {view=== 'output' &&(
-                <div className="outputForm">
-                    <br/>
-                    <p dangerouslySetInnerHTML={{__html: prenatalConsult}} />
-                    <br/>
-                    <button onClick={() => setFormView('input')}>submit another form</button> 
-                </div>)}
+            <div>
+                    <div className="outputForm" ref={parentRef}>
+                        <br/>
+                        <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
+                        <br/>
+                    </div>
+                <button onClick={makeEditable} >Edit text</button>
+                <button onClick={() => setFormView('input')}>submit another form</button> 
+            </div>)}
             
         </div>
     )

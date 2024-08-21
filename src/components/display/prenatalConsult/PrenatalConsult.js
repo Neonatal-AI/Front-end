@@ -1,10 +1,32 @@
-import {React, useState} from 'react'
+import {React, useState, useRef} from 'react'
 
 // internal react components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
 import { visibilityToggle } from '../functions/util'
 import GetPrenatalConsult from './GetPrenatalConsult'
+
+// tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
+const EnableContentEditable = (parentRef) => {
+   
+    if (parentRef.current) {
+      const children = parentRef.current.querySelectorAll('*');
+      children.forEach(child => {
+        child.setAttribute('contentEditable', 'true');
+      });
+    }
+  };
+// tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
+const DisableContentEditable = (parentRef) => {
+   
+    if (parentRef.current) {
+      const children = parentRef.current.querySelectorAll('*');
+      children.forEach(child => {
+        child.setAttribute('contentEditable', 'true');
+      });
+    }
+  };
+
 
 const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
@@ -22,6 +44,13 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     const [pre_eclampsia, setPreEclampsia] = useState('')
     const [clinician_notes, setclinicianNotes] = useState('') 
 
+    const parentRef = useRef(null);
+    const makeEditable = () => {
+        EnableContentEditable(parentRef);
+    };
+    const makeUneditable = () => {
+        DisableContentEditable(parentRef);
+      };
     // web hooks for output options
     const [prenatalConsult, setPrenatalConsult] = useState(null)
 
@@ -125,12 +154,17 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
             </div>}
 
             {view=== 'output' &&(
-                <div className="outputForm">
-                    <br/>
-                    <p dangerouslySetInnerHTML={{__html: prenatalConsult}} />
-                    <br/>
-                    <button onClick={() => setFormView('input')}>submit another form</button> 
-                </div>)}
+            <div>
+                    <div className="outputForm" ref={parentRef}>
+                        <br/>
+                        <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
+                        <br/>
+                    </div>
+                <button onClick={[makeEditable]} >Edit text</button>
+                <button onClick={makeUneditable} >Commit edits</button>
+                <button style={{display:'none'}}>Submit form to database</button>
+                <button onClick={() => setFormView('input')}>submit another form</button> 
+            </div>)}
         </div>
     )
 }

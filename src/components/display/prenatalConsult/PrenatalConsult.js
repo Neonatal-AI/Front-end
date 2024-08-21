@@ -1,4 +1,4 @@
-import {React, useState, useRef, useEffect} from 'react'
+import {React, useState, useRef} from 'react'
 
 // internal react components
 // visual components
@@ -159,8 +159,8 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     'false',
                                     ''
                             )]);
-                            console.log(consult)
-                            // setPrenatalConsult(consult[0].value)
+                            console.log("This is the consult response...\n",consult)
+                            setPrenatalConsult(consult[0].value)
                             // setPrompt(consult[1].value)
                             setFormView('output')
                             visibilityToggle('false', "loading");

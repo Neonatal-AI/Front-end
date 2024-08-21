@@ -1,14 +1,16 @@
-import {React, useState, useRef} from 'react'
+import {React, useState, useRef, useEffect} from 'react'
 
 // internal react components
+// visual components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import { visibilityToggle } from '../../functions/util'
 import GetPrenatalConsult from './GetPrenatalConsult'
+// functional components
+import { visibilityToggle } from '../../functions/util'
+import { useLocalStorage } from '../../functions/LocalCache'
 
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const EnableContentEditable = (parentRef) => {
-   
     if (parentRef.current) {
       const children = parentRef.current.querySelectorAll('*');
       children.forEach(child => {
@@ -18,7 +20,6 @@ const EnableContentEditable = (parentRef) => {
   };
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const DisableContentEditable = (parentRef) => {
-   
     if (parentRef.current) {
       const children = parentRef.current.querySelectorAll('*');
       children.forEach(child => {
@@ -45,6 +46,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     const [clinician_notes, setclinicianNotes] = useState('') 
 
     const parentRef = useRef(null)
+    const consultRef = useRef(null)
     const makeEditable = () => {
         EnableContentEditable(parentRef)
         visibilityToggle("False", "edit")
@@ -52,12 +54,13 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     }
     const makeUneditable = () => {
         DisableContentEditable(parentRef)
+        setPrenatalConsult(consultRef.current.innerHTML)
         visibilityToggle("True", "edit")
         visibilityToggle("False", "save edits")
     }
 
     // web hooks for output options
-    const [prenatalConsult, setPrenatalConsult] = useState(null)
+    const [prenatalConsult, setPrenatalConsult] = useLocalStorage('prenatalConsult', null);
 
     return(
         <div className='inputForm'>
@@ -154,8 +157,9 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     ''
 
                             )]);
-                            console.log(consult[0].value)
+
                             setPrenatalConsult(consult[0].value)
+                            setPrompt(consult[1].value)
                             setFormView('output')
                             visibilityToggle('false', "loading");
                         }}
@@ -166,7 +170,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
             <div>
                     <div className="outputForm" ref={parentRef}>
                         <br/>
-                        <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
+                        <p id="printable" ref={consultRef} dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
                 <button id="edit" onClick={makeEditable} >Edit text</button>

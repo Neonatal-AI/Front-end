@@ -1,7 +1,7 @@
 import {  useState } from 'react';
 
 const useLocalStorage = (key, initialValue) => {
-  const [storedValue, doNothing] = useState(() => {
+  const [storedValue, setStored] = useState(() => {
     try {
       let item = window.localStorage.getItem(key)
       return item
@@ -13,7 +13,7 @@ const useLocalStorage = (key, initialValue) => {
 
   const setValue = (value) => {
     if (value == null){
-        return
+        setStored("blank")
     }
     try {
       window.localStorage.setItem(key, value);

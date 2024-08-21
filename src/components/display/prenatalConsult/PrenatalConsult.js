@@ -61,7 +61,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
 
     // web hooks for output options
     const [prenatalConsult, setPrenatalConsult] = useLocalStorage('prenatalConsult', null);
-
+    const [prompt, setPrompt] = useLocalStorage('prenatalPrompt', null);
     return(
         <div className='inputForm'>
 
@@ -136,6 +136,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                         // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
                         
                         onClick={async ()=>{
+                            setFormView("loading")
                             GradientButton.loading = true;
                             GradientButton.disabled = true;
                             let consult = await Promise.allSettled(
@@ -155,11 +156,10 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     "Proficient",
                                     'false',
                                     ''
-
                             )]);
 
                             setPrenatalConsult(consult[0].value)
-                            setPrompt(consult[1].value)
+                            // setPrompt(consult[1].value)
                             setFormView('output')
                             visibilityToggle('false', "loading");
                         }}

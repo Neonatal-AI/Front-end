@@ -9,16 +9,24 @@ import GetHandout from './GetHandout'
 import Loading from '../common/Loading'
 
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
-const SetContentEditable = (parentRef) => {
-   
-      if (parentRef.current) {
-        const children = parentRef.current.querySelectorAll('*');
-        children.forEach(child => {
-          child.setAttribute('contentEditable', 'true');
-        });
-      }
-    };
-
+const EnableContentEditable = (parentRef) => {
+    if (parentRef.current) {
+      const children = parentRef.current.querySelectorAll('*');
+      children.forEach(child => {
+        child.setAttribute('contentEditable', 'true');
+      });
+    }
+  };
+// tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
+const DisableContentEditable = (parentRef) => {
+    if (parentRef.current) {
+      const children = parentRef.current.querySelectorAll('*');
+      children.forEach(child => {
+        child.setAttribute('contentEditable', 'false');
+      })
+    }
+  }
+  
 const Handout = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
 
@@ -42,11 +50,18 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
     
     const [prenatalConsult, setPrenatalConsult] = useState(null)
 
-    const parentRef = useRef(null);
-    const makeEditable = () => {
-        SetContentEditable(parentRef);
-      };
 
+    const parentRef = useRef(null)
+    const makeEditable = () => {
+        EnableContentEditable(parentRef)
+        visibilityToggle("False", "edit")
+        visibilityToggle("True", "save edits")
+    }
+    const makeUneditable = () => {
+        DisableContentEditable(parentRef)
+        visibilityToggle("True", "edit")
+        visibilityToggle("False", "save edits")
+    }
     return(
         <div className='inputForm'>
 
@@ -166,10 +181,11 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                         <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
-                <button onClick={makeEditable} >Edit text</button>
-                <button onClick={() => setFormView('input')}>submit another form</button> 
-            </div>)}
-            
+                <button id="edit" onClick={makeEditable} >Edit text</button>
+                <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
+                <button style={{display:'none'}}>Submit form to database</button>
+                <button onClick={() => setFormView('input')}>submit another form</button>
+                </div>)}
         </div>
     )
 }

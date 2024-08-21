@@ -22,7 +22,7 @@ const DisableContentEditable = (parentRef) => {
     if (parentRef.current) {
       const children = parentRef.current.querySelectorAll('*');
       children.forEach(child => {
-        child.setAttribute('contentEditable', 'true');
+        child.setAttribute('contentEditable', 'false');
       });
     }
   };
@@ -44,13 +44,18 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     const [pre_eclampsia, setPreEclampsia] = useState('')
     const [clinician_notes, setclinicianNotes] = useState('') 
 
-    const parentRef = useRef(null);
+    const parentRef = useRef(null)
     const makeEditable = () => {
-        EnableContentEditable(parentRef);
-    };
+        EnableContentEditable(parentRef)
+        visibilityToggle("False", "edit")
+        visibilityToggle("True", "save edits")
+    }
     const makeUneditable = () => {
-        DisableContentEditable(parentRef);
-      };
+        DisableContentEditable(parentRef)
+        visibilityToggle("True", "edit")
+        visibilityToggle("False", "save edits")
+    }
+
     // web hooks for output options
     const [prenatalConsult, setPrenatalConsult] = useState(null)
 
@@ -164,8 +169,8 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                         <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
-                <button onClick={makeEditable} >Edit text</button>
-                <button onClick={makeUneditable} >Commit edits</button>
+                <button id="edit" onClick={makeEditable} >Edit text</button>
+                <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
                 <button style={{display:'none'}}>Submit form to database</button>
                 <button onClick={() => setFormView('input')}>submit another form</button> 
             </div>)}

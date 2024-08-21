@@ -5,6 +5,8 @@ import {React, useState, useRef, useEffect} from 'react'
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
 import GetPrenatalConsult from './GetPrenatalConsult'
+import Loading from '../common/Loading'
+
 // functional components
 import { visibilityToggle } from '../../functions/util'
 import { useLocalStorage } from '../../functions/LocalCache'
@@ -165,6 +167,10 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                         }}
                     />
             </div>}
+
+            {view === 'loading' && (
+                                <Loading/>
+                                )}
 
             {view=== 'output' &&(
             <div>

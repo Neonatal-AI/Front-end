@@ -4,7 +4,7 @@ import {React, useState, useRef} from 'react'
 // internal react components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import { visibilityToggle } from '../functions/util'
+import { visibilityToggle } from '../../functions/util'
 import GetHandout from './GetHandout'
 import Loading from '../common/Loading'
 

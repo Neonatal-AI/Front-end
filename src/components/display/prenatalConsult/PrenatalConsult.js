@@ -3,7 +3,7 @@ import {React, useState, useRef} from 'react'
 // internal react components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import { visibilityToggle } from '../functions/util'
+import { visibilityToggle } from '../../functions/util'
 import GetPrenatalConsult from './GetPrenatalConsult'
 
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
@@ -164,7 +164,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                         <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
-                <button onClick={[makeEditable]} >Edit text</button>
+                <button onClick={makeEditable} >Edit text</button>
                 <button onClick={makeUneditable} >Commit edits</button>
                 <button style={{display:'none'}}>Submit form to database</button>
                 <button onClick={() => setFormView('input')}>submit another form</button> 

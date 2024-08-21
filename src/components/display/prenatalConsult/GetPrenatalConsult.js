@@ -10,11 +10,15 @@ const GetPrenatalConsult = async (
     ruptured_membrane,
     length_of_ruptured_membrane,
     pre_eclampsia,
-    clinician_notes
+    clinician_notes,
+    literacy_level,
+    translate,
+    language
 ) => {
     const document = {
         date: new Date(),
         userid: sessionCookie,
+        docType: "consult",
         inputFields: {
             gestational_age: gestational_age,
             birth_weight: birth_weight,
@@ -23,9 +27,14 @@ const GetPrenatalConsult = async (
             sex: sex,
             ethnicity: ethnicity,
             ruptured_membrane: ruptured_membrane,
-            length_of_ruptured_membrane:length_of_ruptured_membrane,
-            pre_eclampsia:pre_eclampsia,
-            clinician_notes:clinician_notes
+            length_of_ruptured_membrane: length_of_ruptured_membrane,
+            pre_eclampsia: pre_eclampsia,
+            clinician_notes: clinician_notes
+        },
+        outputOptions:{
+            literacy_level: literacy_level,
+            translate: translate,
+            language: language
         }
     }
     try {
@@ -42,9 +51,9 @@ const GetPrenatalConsult = async (
         if (!response.ok) {
             throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
         }
-        // console.log(response)
+
         let data = await response.json()
-        // console.log("data: ", data.choices[0].message.content.toString())
+
         return data.choices[0].message.content.toString()
         
     } catch (error) {

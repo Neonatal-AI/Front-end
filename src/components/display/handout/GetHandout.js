@@ -18,6 +18,7 @@ const GetHandout = async (
     const document = {
         date: new Date(),
         userid: sessionCookie,
+        docType: "handout",
         inputFields: {
             gestational_age: gestational_age,
             birth_weight: birth_weight,

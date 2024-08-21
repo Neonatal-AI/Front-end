@@ -143,7 +143,11 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     ruptured_membrane,
                                     length_of_ruptured_membrane,
                                     pre_eclampsia,
-                                    clinician_notes
+                                    clinician_notes,
+                                    "Proficient",
+                                    'false',
+                                    ''
+
                             )]);
                             console.log(consult[0].value)
                             setPrenatalConsult(consult[0].value)

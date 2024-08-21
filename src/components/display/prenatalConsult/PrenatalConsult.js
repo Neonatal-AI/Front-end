@@ -157,7 +157,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     'false',
                                     ''
                             )]);
-
+                            console.log(consult)
                             setPrenatalConsult(consult[0].value)
                             // setPrompt(consult[1].value)
                             setFormView('output')

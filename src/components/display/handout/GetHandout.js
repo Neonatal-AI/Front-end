@@ -52,7 +52,7 @@ const GetHandout = async (
             throw new Error(`HTTP error sending data to server! \n **************************\nstatus: ${response.status}`)
         }
         let data = await response.json()
-        return data
+        return data.choices[0].message.content.toString()
         
     } catch (error) {
     console.error('There was a problem with the fetch operation:', error)

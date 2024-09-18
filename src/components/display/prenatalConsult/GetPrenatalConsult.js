@@ -54,7 +54,7 @@ const GetPrenatalConsult = async (
 
         let data = await response.json()
 
-        return data
+        return data.choices[0].message.content.toString()
         
     } catch (error) {
     console.error('There was a problem with the fetch operation:', error)

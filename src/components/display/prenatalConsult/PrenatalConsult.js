@@ -160,7 +160,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     ''
                             )]);
                             console.log("This is the consult response...\n",consult)
-                            setPrenatalConsult(consult[0].value)
+                            setPrenatalConsult(consult[0].value.document.choices[0].text)
                             setPrompt(consult[0].value.prompt)
                             setFormView('output')
                             visibilityToggle('false', "loading");

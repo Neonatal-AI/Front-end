@@ -2,12 +2,14 @@ import {React, useState, useRef} from 'react'
 
 
 // internal react components
+// visual components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import { visibilityToggle } from '../../functions/util'
 import GetHandout from './GetHandout'
 import Loading from '../common/Loading'
-
+// functional components
+import { useLocalStorage } from '../../functions/LocalCache'
+import { visibilityToggle } from '../../functions/util'
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const EnableContentEditable = (parentRef) => {
     if (parentRef.current) {
@@ -48,10 +50,13 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
     const [translate, setTranslate] = useState('')
     const [language, setLanguage] = useState('')
     
-    const [prenatalConsult, setPrenatalConsult] = useState(null)
+    const [prenatalConsult, setPrenatalConsult] = useLocalStorage('parentalHandout', null);
+    const [prompt, setPrompt] = useLocalStorage('handoutPrompt', null);
 
 
     const parentRef = useRef(null)
+    const consultRef = useRef(null)
+
     const makeEditable = () => {
         EnableContentEditable(parentRef)
         visibilityToggle("False", "edit")
@@ -165,6 +170,7 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                             )
                             console.log(consult[0].value)
                             setPrenatalConsult(consult[0].value)
+                            setPrompt(consult[0].value)
                             setFormView('output')
                         }}
                     />

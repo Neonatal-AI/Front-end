@@ -166,6 +166,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                             visibilityToggle('false', "loading");
                         }}
                     />
+                    <button onClick={setFormView('output')}>View most revent form</button>
             </div>}
 
             {view === 'loading' && (
@@ -183,7 +184,6 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                         trigger={() => <button>Print This document</button>}
                         content={() => consultRef.current} // Ref to the component to be printed
                     />
-      <PrintableComponent ref={componentRef} />
                 <button id="edit" onClick={makeEditable} >Edit text</button>
                 <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
                 <button style={{display:'none'}}>Submit form to database</button>

@@ -5,10 +5,10 @@ import ReactToPrint from 'react-to-print'
 // visual components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import FetchDocument from './FetchDocument'
 import Loading from '../common/Loading'
 
 // functional components
+import FetchDocument from '../../util/FetchDocument'
 import { useLocalStorage } from '../../util/LocalCache'
 import { visibilityToggle } from '../../util/util'
 

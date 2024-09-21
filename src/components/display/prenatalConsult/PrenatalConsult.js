@@ -5,31 +5,30 @@ import ReactToPrint from 'react-to-print'
 // visual components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import GetPrenatalConsult from './GetPrenatalConsult'
+import FetchDocument from '../../util/FetchDocument'
 import Loading from '../common/Loading'
 
 // functional components
-import { visibilityToggle } from '../../functions/util'
-import { useLocalStorage } from '../../functions/LocalCache'
+import { visibilityToggle } from '../../util/util'
+import { useLocalStorage } from '../../util/LocalCache'
 
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const EnableContentEditable = (parentRef) => {
     if (parentRef.current) {
-      const children = parentRef.current.querySelectorAll('*');
+      const children = parentRef.current.querySelectorAll('*')
       children.forEach(child => {
-        child.setAttribute('contentEditable', 'true');
-      });
+        child.setAttribute('contentEditable', 'true')
+      })
     }
-  };
-// tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
+  }
 const DisableContentEditable = (parentRef) => {
     if (parentRef.current) {
-      const children = parentRef.current.querySelectorAll('*');
+      const children = parentRef.current.querySelectorAll('*')
       children.forEach(child => {
-        child.setAttribute('contentEditable', 'false');
-      });
+        child.setAttribute('contentEditable', 'false')
+      })
     }
-  };
+  }
 
 
 const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
@@ -48,8 +47,12 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
     const [pre_eclampsia, setPreEclampsia] = useState('')
     const [clinician_notes, setclinicianNotes] = useState('') 
 
+    // hooks for locally stored document
+    const [prenatalConsult, setPrenatalConsult] = useLocalStorage('prenatalConsult', null)
+    const [prompt, setPrompt] = useLocalStorage('prenatalPrompt', null)
     const parentRef = useRef(null)
     const consultRef = useRef(null)
+
     const makeEditable = () => {
         EnableContentEditable(parentRef)
         visibilityToggle("False", "edit")
@@ -62,9 +65,6 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
         visibilityToggle("False", "save edits")
     }
 
-    // web hooks for output options
-    const [prenatalConsult, setPrenatalConsult] = useLocalStorage('prenatalConsult', null);
-    const [prompt, setPrompt] = useLocalStorage('prenatalPrompt', null);
     return(
         <div className='inputForm'>
 
@@ -136,15 +136,13 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
 
                 <GradientButton 
                         type="submit" 
-                        text="Create Prenatal Consult Docs"
-                        // loading={loginLoading} // I need loginLoading back. it only looked like it didn't do anything
-                        
+                        text="Create Prenatal Consult Docs"                        
                         onClick={async ()=>{
                             setFormView("loading")
-                            GradientButton.loading = true;
-                            GradientButton.disabled = true;
+                            GradientButton.loading = true
+                            GradientButton.disabled = true
                             let consult = await Promise.allSettled(
-                                [GetPrenatalConsult(    
+                                [FetchDocument(    
                                     sessionCookie, 
                                     API_URL, 
                                     gestational_age, 
@@ -157,41 +155,42 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                                     length_of_ruptured_membrane,
                                     pre_eclampsia,
                                     clinician_notes,
-                                    "Proficient",
+                                    'Proficient',
                                     'false',
-                                    ''
-                            )]);
-                            console.log("This is the consult response...\n",consult)
+                                    '',
+                                    'consult'
+                                )
+                                ]
+                            )
                             setPrenatalConsult(consult[0].value.document)
                             setPrompt(consult[0].value.prompt)
                             setFormView('output')
-                            visibilityToggle('false', "loading");
+                            visibilityToggle('false', "loading")
                         }}
                     />
-            <button onClick={async ()=>{setFormView('output')}}>View most recently generated doc</button>
+                <button onClick={async ()=>{setFormView('output')}}>View most recently generated doc</button>
 
             </div>}
 
-            {view === 'loading' && (
-                                <Loading/>
-                                )}
+            {view === 'loading' && (<Loading/>)}
 
-            {view=== 'output' &&(
-            <div>
+            {view === 'output' &&(
+                <div>
                     <div className="outputForm" ref={parentRef}>
                         <br/>
                         <p id="printable" ref={consultRef} dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
+                    <button id="edit" onClick={makeEditable} >Edit text</button>
+                    <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
+                    <button style={{display:'none'}}>Submit form to database</button>
                     <ReactToPrint
-                        trigger={() => <button>Print This document</button>}
+                        trigger={() => <button>Print This Document</button>}
                         content={() => consultRef.current} // Ref to the component to be printed
                     />
-                <button id="edit" onClick={makeEditable} >Edit text</button>
-                <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
-                <button style={{display:'none'}}>Submit form to database</button>
-                <button onClick={() => setFormView('input')}>submit another form</button> 
-            </div>)}
+                    <button onClick={() => setFormView('input')}>submit another form</button> 
+                </div>)
+            }
         </div>
     )
 }

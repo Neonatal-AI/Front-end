@@ -1,37 +1,37 @@
 import {React, useState, useRef} from 'react'
-
+import ReactToPrint from 'react-to-print'
 
 // internal react components
 // visual components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import GetHandout from './GetHandout'
+import FetchDocument from './FetchDocument'
 import Loading from '../common/Loading'
+
 // functional components
-import { useLocalStorage } from '../../functions/LocalCache'
-import { visibilityToggle } from '../../functions/util'
+import { useLocalStorage } from '../../util/LocalCache'
+import { visibilityToggle } from '../../util/util'
+
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const EnableContentEditable = (parentRef) => {
     if (parentRef.current) {
-      const children = parentRef.current.querySelectorAll('*');
+      const children = parentRef.current.querySelectorAll('*')
       children.forEach(child => {
-        child.setAttribute('contentEditable', 'true');
-      });
+        child.setAttribute('contentEditable', 'true')
+      })
     }
-  };
-// tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
+  }
 const DisableContentEditable = (parentRef) => {
     if (parentRef.current) {
-      const children = parentRef.current.querySelectorAll('*');
+      const children = parentRef.current.querySelectorAll('*')
       children.forEach(child => {
-        child.setAttribute('contentEditable', 'false');
+        child.setAttribute('contentEditable', 'false')
       })
     }
   }
   
 const Handout = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
-
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
 
     // web hooks for input fields
@@ -45,17 +45,17 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
     const [length_of_ruptured_membrane, setLengthOfRupturedMembrane] = useState(null)
     const [pre_eclampsia, setPreEclampsia] = useState('')
     const [clinician_notes, setclinicianNotes] = useState('') 
+    
     // web hooks for output options
     const [literacy_level, setLiteracyLevel] = useState('')
     const [translate, setTranslate] = useState('')
     const [language, setLanguage] = useState('')
     
-    const [prenatalConsult, setPrenatalConsult] = useLocalStorage('parentalHandout', null);
-    const [prompt, setPrompt] = useLocalStorage('handoutPrompt', null);
-
-
+    // hooks for locally stored document
+    const [prenatalConsult, setPrenatalConsult] = useLocalStorage('parentalHandout', null)
+    const [prompt, setPrompt] = useLocalStorage('handoutPrompt', null)
     const parentRef = useRef(null)
-    const consultRef = useRef(null)
+    const handoutRef = useRef(null)
 
     const makeEditable = () => {
         EnableContentEditable(parentRef)
@@ -64,9 +64,11 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
     }
     const makeUneditable = () => {
         DisableContentEditable(parentRef)
+        setPrenatalConsult(handoutRef.current.innerHTML)
         visibilityToggle("True", "edit")
         visibilityToggle("False", "save edits")
     }
+
     return(
         <div className='inputForm'>
 
@@ -146,10 +148,10 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                         text="Create Prenatal Consult Docs"
                         onClick={async ()=>{
                             setFormView("loading")
-                            GradientButton.loading = true;
-                            GradientButton.disabled = true;
+                            GradientButton.loading = true
+                            GradientButton.disabled = true
                             let consult = await Promise.allSettled(
-                                [GetHandout(    
+                                [FetchDocument(    
                                     sessionCookie, 
                                     API_URL, 
                                     gestational_age, 
@@ -164,35 +166,41 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                                     clinician_notes,
                                     literacy_level,
                                     translate,
-                                    language
+                                    language,
+                                    'handout'
                                     )
                                 ]
                             )
-                            console.log(consult[0].value)
-                            setPrenatalConsult(consult[0].value)
-                            setPrompt(consult[0].value)
+                            setPrenatalConsult(consult[0].value.document)
+                            setPrompt(consult[0].value.prompt)
                             setFormView('output')
+                            visibilityToggle('false', "loading")
                         }}
                     />
+                <button onClick={async ()=>{setFormView('output')}}>View most recently generated doc</button>
             </div>}
 
-            {view === 'loading' && (
-                                <Loading/>
-                                )}
+            {view === 'loading' && (<Loading/>)}
 
-            {view=== 'output' &&(
-            <div>
-                    <div className="outputForm" ref={parentRef}>
+            {view === 'output' &&(
+                <div>
+                    <div className="outputForm" ref={handoutRef}>
                         <br/>
                         <p id="printable" dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
-                <button id="edit" onClick={makeEditable} >Edit text</button>
-                <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
-                <button style={{display:'none'}}>Submit form to database</button>
-                <button onClick={() => setFormView('input')}>submit another form</button>
-                </div>)}
+
+                    <button id="edit" onClick={makeEditable} >Edit text</button>
+                    <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
+                    <button style={{display:'none'}}>Submit form to database</button>
+                    <ReactToPrint
+                        trigger={() => <button>Print This Document</button>}
+                        content={() => handoutRef.current} // Ref to the component to be printed
+                    />
+                    <button onClick={() => setFormView('input')}>submit another form</button>
+                </div>)
+            }
         </div>
     )
 }
-export default Handout;
+export default Handout

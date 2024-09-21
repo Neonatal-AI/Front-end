@@ -1,4 +1,5 @@
 import {React, useState, useRef} from 'react'
+import ReactToPrint from 'react-to-print'
 
 // internal react components
 // visual components

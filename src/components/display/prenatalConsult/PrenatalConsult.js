@@ -133,6 +133,7 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                     {/* buttons for document creation */}
                     
                 </div>
+
                 <GradientButton 
                         type="submit" 
                         text="Create Prenatal Consult Docs"
@@ -167,7 +168,8 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                             visibilityToggle('false', "loading");
                         }}
                     />
-                    <button onClick={setFormView('output')}>View most revent form</button>
+            <button onClick={async ()=>{setFormView('output')}}>View most recently generated doc</button>
+
             </div>}
 
             {view === 'loading' && (

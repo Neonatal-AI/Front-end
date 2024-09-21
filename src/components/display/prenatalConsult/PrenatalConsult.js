@@ -179,6 +179,11 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                         <p id="printable" ref={consultRef} dangerouslySetInnerHTML={{__html: prenatalConsult}} />
                         <br/>
                     </div>
+                    <ReactToPrint
+                        trigger={() => <button>Print This document</button>}
+                        content={() => consultRef.current} // Ref to the component to be printed
+                    />
+      <PrintableComponent ref={componentRef} />
                 <button id="edit" onClick={makeEditable} >Edit text</button>
                 <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
                 <button style={{display:'none'}}>Submit form to database</button>

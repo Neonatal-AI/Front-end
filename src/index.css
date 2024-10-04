@@ -170,9 +170,6 @@ textarea{
   cursor: crosshair;
   display: block;
   width: auto;
-  min-width: 50px;
-  min-height: 25px;
-  max-width: fit-content;
   height: auto;
   border: 1px solid;
   border-radius: 1px;
@@ -348,6 +345,3 @@ textarea{
   display: none;
 }
 
-#clinician_notes{
-  min-height: 90px;
-}

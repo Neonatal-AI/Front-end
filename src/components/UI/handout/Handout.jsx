@@ -88,7 +88,7 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                             <label>Estimated birth weight (grams):  </label>
                                 <span className="sidenote">Valid Ranges for Calculators: BPD: 501-1250 | EPBO: 401-1000</span>
                                 <br/>
-                                <textarea rows="2" cols="6" id="birth_weight" name="birth_weight" onChange={(e)=>setBirthWeight(e.target.value)}></textarea> 
+                                <textarea  id="birth_weight" name="birth_weight" onChange={(e)=>setBirthWeight(e.target.value)}></textarea> 
                             <br/>
                             {/* used in BPD calculator only */}
                             <label>Singleton birth: </label>

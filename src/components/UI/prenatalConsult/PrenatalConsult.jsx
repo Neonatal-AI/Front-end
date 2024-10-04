@@ -183,12 +183,12 @@ const PrenatalConsult = ({sessionCookie, view='', setFormView}) => {
                     </div>
                     <button id="edit" onClick={makeEditable} >Edit text</button>
                     <button style={{display:'none'}} id="save edits" onClick={makeUneditable} >Commit edits</button>
-                    <button style={{display:'none'}}>Submit form to database</button>
+                    <button style={{display:'none'}}>Commit This Form to Database</button>
                     <ReactToPrint
                         trigger={() => <button>Print This Document</button>}
                         content={() => consultRef.current} // Ref to the component to be printed
                     />
-                    <button onClick={() => setFormView('input')}>submit another form</button> 
+                    <button onClick={() => setFormView('input')}>Submit Another Form</button> 
                 </div>)
             }
         </div>

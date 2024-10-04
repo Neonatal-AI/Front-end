@@ -6,7 +6,7 @@ const visibilityToggle = (boolean, elementId) => {
     const element = document.getElementById(elementId);
 
     if (element) {
-        if (boolean === 'True') {
+        if (boolean) {
             element.style.display = 'block';
         } else {
             element.style.display = 'none';

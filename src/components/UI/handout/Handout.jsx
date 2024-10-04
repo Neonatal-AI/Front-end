@@ -59,14 +59,14 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
 
     const makeEditable = () => {
         EnableContentEditable(parentRef)
-        visibilityToggle("False", "edit")
-        visibilityToggle("True", "save edits")
+        visibilityToggle(false, "edit")
+        visibilityToggle(true, "save edits")
     }
     const makeUneditable = () => {
         DisableContentEditable(parentRef)
         setPrenatalConsult(handoutRef.current.innerHTML)
-        visibilityToggle("True", "edit")
-        visibilityToggle("False", "save edits")
+        visibilityToggle(true, "edit")
+        visibilityToggle(false, "save edits")
     }
 
     return(

@@ -208,12 +208,12 @@ textarea{
   align-items: center;
   justify-content: top;
   object-fit: scale-down;
-  height: 100vh;
-  width: 100vw;
-  max-height: 94vh;
+  height: 92vh;
+  width: 99vw;
+  max-height: auto;
   max-width: auto;
   overflow-y: auto;
-  margin: 2%;
+  margin: 1%;
   border-radius: 12px;
 }
 .selectionArea{

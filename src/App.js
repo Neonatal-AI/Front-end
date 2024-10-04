@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 // internal components
-import Home from './components/display/Home'
-import Main from './components/display/Main'
-import TOS from './components/display/TOS'
+import Home from './components/UI/Home'
+import Main from './components/UI/Main'
+import TOS from './components/UI/TOS'
 // // for later use when handling TOS submission
 // import { UserProvider } from './context/Provider'
 // import deleteCookies from './components/CookieRemoval'

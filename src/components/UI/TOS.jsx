@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import React from 'react'
 
 import GradientButton from './common/GradientButton'
 
 
 
 const TOS = () => { 
-
-  const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000'
 
   // Get current date and time
   var now = new Date();

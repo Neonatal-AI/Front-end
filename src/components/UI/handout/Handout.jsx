@@ -8,9 +8,9 @@ import DropdownMenu from '../common/DropdownMenu'
 import Loading from '../common/Loading'
 
 // functional components
-import FetchDocument from '../../util/FetchDocument'
-import { useLocalStorage } from '../../util/LocalCache'
-import { visibilityToggle } from '../../util/util'
+import FetchDocument from '../../functional/FetchDocument'
+import { useLocalStorage } from '../../functional/LocalCache'
+import { visibilityToggle } from '../../functional/util'
 
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const EnableContentEditable = (parentRef) => {

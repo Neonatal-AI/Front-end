@@ -5,12 +5,12 @@ import ReactToPrint from 'react-to-print'
 // visual components
 import GradientButton from '../common/GradientButton'
 import DropdownMenu from '../common/DropdownMenu'
-import FetchDocument from '../../util/FetchDocument'
+import FetchDocument from '../../functional/FetchDocument'
 import Loading from '../common/Loading'
 
 // functional components
-import { visibilityToggle } from '../../util/util'
-import { useLocalStorage } from '../../util/LocalCache'
+import { visibilityToggle } from '../../functional/util'
+import { useLocalStorage } from '../../functional/LocalCache'
 
 // tried putting this in util but error ensued from illegal hook use... may be worth debugging for reusability...
 const EnableContentEditable = (parentRef) => {

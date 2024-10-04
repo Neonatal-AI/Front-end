@@ -1,14 +1,13 @@
 import * as React from "react";
 import { useReactToPrint } from "react-to-print";
 
-import Handout from "../handout/Handout";
 export const Printing = () => {
   const componentRef = React.useRef(null);
 
   const onBeforeGetContentResolve = React.useRef(null);
 
   const [loading, setLoading] = React.useState(false);
-  const [text, setText] = React.useState("old boring text");
+  const [text, setText] = React.useState("");
 
   const handleAfterPrint = React.useCallback(() => {
     console.log("`onAfterPrint` called"); // tslint:disable-line no-console
@@ -28,7 +27,7 @@ export const Printing = () => {
 
       setTimeout(() => {
         setLoading(false);
-        setText("New, Updated Text!");
+        setText("updated");
         resolve();
       }, 2000);
     });
@@ -49,7 +48,7 @@ export const Printing = () => {
 
   React.useEffect(() => {
     if (
-      text === "New, Updated Text!" &&
+      text &&
       typeof onBeforeGetContentResolve.current === "function"
     ) {
       onBeforeGetContentResolve.current();

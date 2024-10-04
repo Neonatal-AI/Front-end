@@ -12,7 +12,7 @@ const useLocalStorage = (key, initialValue) => {
   });
 
   const setValue = (value) => {
-    if (value == null){
+    if (!value){
         setStored("blank")
     }
     try {

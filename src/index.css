@@ -1,0 +1,347 @@
+/* font imports from google  */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,600;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Oswald:wght@200;400;600;700&family=Roboto:wght@100;300;400;500;700;900&family=Rubik+Mono+One&display=swap');
+/* generic text */
+
+* {
+  color: black;
+  font-family: 'Open Sans', sans-serif, monospace;
+  font-size: large;
+}
+
+/* animation keyframe */
+@keyframes gradientChange {
+  0% {
+    background-color: #000000;
+  }
+  25% {
+    background-color: #d3d3d3;
+  }
+  50% {
+    background-color: #f40000;
+  }
+  75% {
+    background-color: #d3d3d3;
+  }
+  100% {
+    background-color: #000000;
+  }
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0 0;
+  }
+  65% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+@keyframes bounce {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transform: translateY(0);
+  }
+  10%{
+    transform: translateY(-30px);
+  }
+  30% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  70% {
+    transform: translateY(-5px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
+:link{
+  color:#17467d;
+  text-decoration: none;
+  font-style: oblique;
+}
+:link:hover{
+  color:#437C97;
+  text-decoration: underline;
+}
+:link:active{
+  border:#17467d 1px solid;
+}
+:link:visited{
+  color:#437C97;
+}
+.nav{
+  color: white;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-left: 5px;
+  padding-left: 5px;
+}
+/* formatting for generic HTML tag types */
+body {
+  color: black;
+  margin: 0;
+  padding: 0;
+  background-image: url("./images/transluscentgradient2.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat, repeat;
+  background-size: cover; 
+  display: flex;
+  animation: gradientChange 60s ease-out infinite;
+  }
+h1 {
+  color: #437C97;
+  align-content: center;
+  font-family: 'Roboto Mono', Roboto, Oxygen, Ubuntu, monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 55px;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+}
+h2 {
+  color: #17467D;
+  align-content: center;
+  font-family: 'Roboto Mono', Roboto, Oxygen, Ubuntu, monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: calc(1.35rem + 0.525vw);
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+}
+h3 {
+  color: #17467D;
+  align-content: center;
+  font-family: 'Roboto Mono', Roboto, Oxygen, Ubuntu, monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: calc(1.2625rem + 0.15vw);
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+}
+a{
+  color:rgb(0, 0, 0)
+}
+p {
+  color: black;
+  margin: 5px;
+  border: 5px;
+  padding: 5px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.623) 1px 2px 2px 3px;
+}
+button {
+  display: flex;
+  font-size: x-large;
+  color: #eeeeee;
+  cursor: pointer;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 20px;
+  background: #17467d;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 3s ease;
+  margin: 5px;
+  border: 5px;
+  padding: 5px;
+} 
+button:hover {
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(.4, 27.8, 72.2, 0.8)100%);
+  background-size: 200% 100%;
+  animation: gradientMove 3s linear infinite;
+} 
+button:focus {
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  animation: bounce 2s linear 200ms 1;
+} 
+
+label {
+  color: black;
+  border-radius: 20px;
+}
+
+textarea{
+  color: black;
+  cursor: crosshair;
+  display: block;
+  width: auto;
+  height: auto;
+  border: 1px solid;
+  border-radius: 1px;
+  background: white;
+  align-content: normal;
+  text-align: left;
+  resize: both;
+}
+::-webkit-scrollbar {
+  -webkit-box-shadow: inset 0 0 6px     rgba(230, 0, 0, 0.7); 
+  width: 14px;
+  border-radius: 12px;
+
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px     rgba(0, 0, 0, 0.7); 
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  -webkit-box-shadow: inset 0 0 6px     rgba(236, 0, 0, 0.5); 
+}
+/* class name formatting */
+.app{
+  display: flex;
+}
+.main {
+  background: #fff;
+  background-size: cover;
+  display: flex;
+  vertical-align: 13%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  object-fit: scale-down;
+  height: 92vh;
+  width: 99vw;
+  max-height: auto;
+  max-width: auto;
+  overflow-y: auto;
+  margin: 1%;
+  border-radius: 12px;
+}
+.selectionArea{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.PrenatalConsult{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  max-height: fit-content;
+  max-width: 90vw;
+}
+.Handout{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.inputForm{
+  max-height: fit-content;
+  max-width: 90vw;
+  padding-top: 5px;
+}
+.inputData {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  max-height: fit-content;
+  max-width: 90vw;
+  text-align: left;
+  align-items: start;
+  justify-content: top;
+  margin: 0.5rem;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  color: black;
+  cursor: crosshair;
+  align-content: left;
+  text-align: center;
+  padding: 4px;
+  margin: 4px;
+}
+.dropdown-header {
+  z-index: 1000;
+  width: 100px;
+  color: white;
+  cursor: crosshair;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 20px;
+  background: #17467d;
+  align-content: center;
+  text-align: center;
+  margin: 4px;
+  margin-left: 0;
+  padding: 7px;
+}
+.dropdown-options {
+  z-index: 1001;
+  width: 100px;
+  position: absolute;
+  color: white;
+  cursor: crosshair;
+  margin: 4px;
+  border:rgba(64, 64, 64, 0.5) solid;
+  border-radius: 20px;
+  padding: 2px;
+  background: white;
+  align-content: center;
+  text-align: center;
+  width: max-content;
+}
+
+.dropdown-option {
+  color: white;
+  cursor: crosshair;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 20px;
+  background: #17467d;
+  align-content: center;
+  text-align: center;
+  width: max-content;
+  margin: 3px;
+  padding: 7px;
+}
+
+
+.dropdown-option:hover {
+  cursor: crosshair;
+  border:rgba(64, 64, 64, 0.5);
+  border-radius: 30px;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.727)0%, #17467d 90%);
+  box-shadow: rgba(0,212,255,.15) 0 20px 20px,
+  rgba(0,212,255,.15) 0 -8px 18px,
+  rgba(0,212,255,.15) 0 2px 10px;
+  align-content: center;
+  text-align: center;
+}
+.sidenote{
+  color: black;
+  background-color: #eeeeee;
+  margin: 2px;
+  padding-right: 5px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  max-width: 90vw;
+}
+
+
+#loading{
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.733);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+
+/*  CSS by ID */
+#length_of_ruptured_membrane{
+  display: none;
+}
+
+#translation_language{
+  display: none;
+}
+

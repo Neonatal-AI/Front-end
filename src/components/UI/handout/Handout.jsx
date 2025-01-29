@@ -29,7 +29,7 @@ const DisableContentEditable = (parentRef) => {
       })
     }
   }
-  
+
 const Handout = ({sessionCookie, view='', setFormView}) => {
     // variables and hooks
     const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1'
@@ -173,6 +173,7 @@ const Handout = ({sessionCookie, view='', setFormView}) => {
                             )
                             setPrenatalConsult(consult[0].value.document)
                             setPrompt(consult[0].value.prompt)
+                            window.location.reload(false);
                             setFormView('output')
                             visibilityToggle('false', "loading")
                         }}
